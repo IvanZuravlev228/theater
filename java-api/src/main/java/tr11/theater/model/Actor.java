@@ -13,8 +13,12 @@ public class Actor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    @Column(name = "lastname")
     private String lastname;
     private Double experience;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "prizes_actors",
+            joinColumns = @JoinColumn(name = "actors_id"),
+            inverseJoinColumns = @JoinColumn(name = "prizes_id"))
     private List<Prizes> prizes;
 }

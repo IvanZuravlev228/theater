@@ -15,6 +15,9 @@ public class Performance {
     private String name;
     private String description;
     private Double budget;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "performances_actors",
+            joinColumns = @JoinColumn(name = "performances_id"),
+            inverseJoinColumns = @JoinColumn(name = "actors_id"))
     private List<Actor> actors;
 }
