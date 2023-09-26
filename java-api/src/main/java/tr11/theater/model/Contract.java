@@ -11,6 +11,7 @@ public class Contract {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne
+    @JoinColumn(name = "actor_id")
     private Actor actor;
     private Double salary;
 }

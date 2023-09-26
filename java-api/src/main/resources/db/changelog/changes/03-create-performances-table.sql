@@ -1,6 +1,5 @@
 --liquibase formatted sql
 --changeset IvanZhuravlev:03-create-performances-table
-DROP TABLE IF EXISTS performances;
 CREATE TABLE performances (
                               id bigint NOT NULL AUTO_INCREMENT,
                               name varchar(255) NOT NULL,

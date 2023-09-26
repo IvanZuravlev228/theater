@@ -1,6 +1,5 @@
 --liquibase formatted sql
 --changeset IvanZhuravlev:06-create-prizes-actors-table
-DROP TABLE IF EXISTS prizes_actors;
 CREATE TABLE prizes_actors (
                                prizes_id bigint NOT NULL,
                                actors_id bigint NOT NULL,

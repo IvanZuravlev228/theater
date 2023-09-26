@@ -1,6 +1,4 @@
 databaseChangeLog:
-#  - include:
-#        file: /db/changelog/changes/00-drop-all.sql
   - include:
       file: /db/changelog/changes/01-create-actors-table.sql
   - include:
@@ -13,3 +11,15 @@ databaseChangeLog:
       file: /db/changelog/changes/05-create-performances-actors-table.sql
   - include:
       file: /db/changelog/changes/06-create-prizes-actors-table.sql
+  - include:
+      file: /db/changelog/changes/07-default-init-actors.sql
+  - include:
+      file: /db/changelog/changes/08-default-init-prizes.sql
+  - include:
+      file: /db/changelog/changes/09-default-init-performances.sql
+  - include:
+      file: /db/changelog/changes/10-default-init-contracts.sql
+  - include:
+      file: /db/changelog/changes/11-default-init-performances_actors.sql
+  - include:
+      file: /db/changelog/changes/12-default-init-prizes_actors.sql
