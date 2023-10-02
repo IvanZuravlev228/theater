@@ -9,5 +9,5 @@ public class ActorResponseDto {
     private String name;
     private String lastname;
     private Double experience;
-    private List<Long> prizeIds;
+    private List<Long> prizesIds;
 }

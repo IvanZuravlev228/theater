@@ -1,2 +1,34 @@
 <app-header></app-header>
-<p>actor works!</p>
+
+<div class="actor-infor">
+  <div class="all-actors">
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>name</th>
+        <th>lastname</th>
+        <th>experience</th>
+        <th>prizesIds</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let actor of actors">
+        <td>{{ actor.id }}</td>
+        <td>{{ actor.name }}</td>
+        <td>{{ actor.lastname }}</td>
+        <td>{{ actor.experience }}</td>
+        <button (click)="showPrizesByActorId(actor.prizesIds)">show prizes</button>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prizes-actor">
+    <div *ngFor="let prize of prizesByActorId">
+      <p>{{ prize.name }}</p>
+      <p>{{ prize.coefficient }}</p>
+    </div>
+  </div>
+</div>
+
