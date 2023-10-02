@@ -35,7 +35,7 @@ public class ActorMapper implements RequestResponseMapper<Actor, ActorRequestDto
         dto.setName(model.getName());
         dto.setLastname(model.getLastname());
         dto.setExperience(model.getExperience());
-        dto.setPrizeIds(model.getPrizes()
+        dto.setPrizesIds(model.getPrizes()
                 .stream()
                 .map(Prizes::getId)
                 .collect(Collectors.toList()));

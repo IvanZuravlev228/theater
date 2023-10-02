@@ -1,0 +1,61 @@
+/* Стили для контейнера "actor-infor" */
+.actor-infor {
+  display: flex;
+}
+
+/* Стили для блока "all-actors" */
+.all-actors {
+  flex: 75%; /* Занимает 75% ширины экрана */
+  padding: 20px;
+}
+
+/* Стили для таблицы */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+/* Стили для заголовков таблицы */
+thead th {
+  background-color: #b36cb9; /* Красный цвет */
+  color: #fff;
+  font-weight: bold;
+  text-align: left;
+  padding: 10px;
+}
+
+/* Стили для ячеек таблицы */
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* Линии-разделители между строками */
+}
+
+/* Стили для кнопок "show prizes" */
+button {
+  background-color: #b36cb9;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #000; /* Черный цвет */
+  transition: background-color 0.5s ease;
+}
+
+/* Стили для блока "prizes-actor" */
+.prizes-actor {
+  flex: 25%; /* Занимает 25% ширины экрана */
+  padding: 20px;
+}
+
+/* Стили для параграфов в блоке "prizes-actor" */
+.prizes-actor p {
+  margin: 0;
+  font-weight: bold;
+}

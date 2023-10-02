@@ -14,4 +14,6 @@ public interface PrizesService {
     Prizes update(Long previousId, Prizes forUpdate);
 
     void delete(Long id);
+
+    List<Prizes> getAllByIds(List<Long> ids);
 }

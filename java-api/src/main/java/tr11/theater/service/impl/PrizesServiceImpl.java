@@ -1,6 +1,7 @@
 package tr11.theater.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import tr11.theater.model.Prizes;
@@ -38,5 +39,10 @@ public class PrizesServiceImpl implements PrizesService {
     @Override
     public void delete(Long id) {
         prizesRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Prizes> getAllByIds(List<Long> ids) {
+        return ids.stream().map(this::getById).collect(Collectors.toList());
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tr11.theater.dto.prizes.PrizesIdsRequestDto;
 import tr11.theater.dto.prizes.PrizesRequestDto;
 import tr11.theater.dto.prizes.PrizesResponseDto;
 import tr11.theater.model.Prizes;
@@ -61,5 +62,13 @@ public class PrizesController implements DefaultCrudController<PrizesRequestDto,
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         prizesService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/by-actor")
+    public ResponseEntity<List<PrizesResponseDto>> getByActorId(@RequestBody PrizesIdsRequestDto idsDto) {
+        return new ResponseEntity<>(prizesService.getAllByIds(idsDto.getPrizesIds())
+                .stream()
+                .map(prizesMapper::toDto)
+                .collect(Collectors.toList()), HttpStatus.OK);
     }
 }
