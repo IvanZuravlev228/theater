@@ -1,0 +1,46 @@
+/* Основной контейнер хедера */
+.header {
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+/* Стили для логотипа */
+.logo-icon {
+  font-size: 34px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.logo-icon:hover {
+  color: #b36cb9;
+  transition: color 1.5s ease;
+}
+
+/* Стили для навигации */
+.navigation-container {
+  display: flex;
+}
+
+/* Стили для кнопок навигации */
+.actor-container, .perfor-container, .contract-container {
+  margin-left: 20px;
+}
+
+.actor-container button, .perfor-container button, .contract-container button {
+  background-color: #b36cb9; /* Красный цвет */
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Стили для кнопок при наведении */
+.actor-container button:hover, .perfor-container button:hover, .contract-container button:hover {
+  background-color: #000; /* Черный цвет */
+  transition: background-color 0.5s ease;
+}
