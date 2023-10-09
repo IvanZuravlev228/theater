@@ -6,12 +6,16 @@ import {PerformanceComponent} from "./components/performance/performance.compone
 import {ContractComponent} from "./components/contract/contract.component";
 import {TheaterComponent} from "./components/theater/theater.component";
 import {environment} from "../environment/environment";
+import {PerformanceDetailsComponent} from "./components/performance-details/performance-details.component";
+import {ContractDetailsComponent} from "./components/contract-details/contract-details.component";
 
 const routes: Routes = [
   {path: '', component: AppComponent},
   {path: environment.rootURL + "/actors", component: ActorComponent},
   {path: environment.rootURL + "/performances", component: PerformanceComponent},
+  {path: environment.rootURL + "/performances/details", component: PerformanceDetailsComponent},
   {path: environment.rootURL + "/contracts", component: ContractComponent},
+  {path: environment.rootURL + "/contracts/details", component: ContractDetailsComponent},
   {path: environment.rootURL, component: TheaterComponent}
 ];
 

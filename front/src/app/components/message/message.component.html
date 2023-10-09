@@ -1,0 +1,11 @@
+<div class="centered-container">
+  <div class="error-box" *ngIf="hidden">
+    <div class="title">
+      <p class="error-title">{{title}}</p>
+      <button class="close-button" (click)="hidden = false">X</button>
+    </div>
+    <div class="message-container">
+      <p class="error-message">{{message}}</p>
+    </div>
+  </div>
+</div>

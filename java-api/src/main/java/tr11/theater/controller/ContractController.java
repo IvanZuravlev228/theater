@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,25 +22,22 @@ import tr11.theater.service.mapper.RequestResponseMapper;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/contracts")
-public class ContractController implements DefaultCrudController<ContractRequestDto, ContractResponseDto> {
+public class ContractController {
     private final ContractService contractService;
     private final RequestResponseMapper<Contract, ContractRequestDto, ContractResponseDto> contractMapper;
 
     @PostMapping
-    @Override
     public ResponseEntity<ContractResponseDto> save(@RequestBody ContractRequestDto requestEntity) {
         return new ResponseEntity<>(contractMapper.toDto(
                 contractService.save(contractMapper.toModel(requestEntity))), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    @Override
     public ResponseEntity<ContractResponseDto> getById(@PathVariable Long id) {
         return new ResponseEntity<>(contractMapper.toDto(contractService.getById(id)), HttpStatus.OK);
     }
 
     @GetMapping
-    @Override
     public ResponseEntity<List<ContractResponseDto>> getAll() {
         return new ResponseEntity<>(contractService.getAll()
                 .stream()
@@ -50,7 +46,6 @@ public class ContractController implements DefaultCrudController<ContractRequest
     }
 
     @PutMapping("/{prevId}")
-    @Override
     public ResponseEntity<ContractResponseDto> update(@PathVariable Long prevId,
                                                       @RequestBody ContractRequestDto newEntity) {
         return new ResponseEntity<>(contractMapper.toDto(
@@ -58,9 +53,14 @@ public class ContractController implements DefaultCrudController<ContractRequest
     }
 
     @DeleteMapping("/{id}")
-    @Override
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         contractService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/actor/{actorId}/performance/{perId}")
+    public ResponseEntity<ContractResponseDto> getByActorAndPerformanceId(@PathVariable Long actorId,
+                                                                          @PathVariable Long perId) {
+        return new ResponseEntity<>(contractMapper.toDto(contractService.getByActorAndPerformanceId(actorId, perId)), HttpStatus.OK);
     }
 }

@@ -24,8 +24,8 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public Contract getByActorId(Long actorId) {
-        return contractRepository.findByActorId(actorId).orElseThrow(() ->
+    public Contract getByActorAndPerformanceId(Long actorId, Long perId) {
+        return contractRepository.findByActorAndPerformanceId(actorId, perId).orElseThrow(() ->
                 new RuntimeException("Can't find actor by actor's id: " + actorId));
     }
 

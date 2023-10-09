@@ -4,4 +4,5 @@ export class Actor {
   lastname: string = "";
   experience: number = -1;
   prizesIds: number[] = [];
+  selected: boolean = false;
 }

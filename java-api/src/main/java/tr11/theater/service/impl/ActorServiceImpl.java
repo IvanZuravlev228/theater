@@ -29,6 +29,11 @@ public class ActorServiceImpl implements ActorService {
     }
 
     @Override
+    public List<Actor> getAllWithoutContract() {
+        return actorRepository.findAllWithoutContract();
+    }
+
+    @Override
     public Actor update(Long prevActorId, Actor actorForUpdate) {
         Actor prevActor = getById(prevActorId);
         actorForUpdate.setId(prevActor.getId());
@@ -38,5 +43,10 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public void delete(Long id) {
         actorRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Actor> getAllByPerformanceId(Long perId) {
+        return actorRepository.findActorsByPerformanceId(perId);
     }
 }

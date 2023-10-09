@@ -1,4 +1,4 @@
-export class Prize {
+export class PrizeRequest {
   id: number = -1;
   name: string = "";
   coefficient: number = -1;

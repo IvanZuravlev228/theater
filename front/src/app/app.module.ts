@@ -10,6 +10,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { PerformanceComponent } from './components/performance/performance.component';
 import { ContractComponent } from './components/contract/contract.component';
 import { TheaterComponent } from './components/theater/theater.component';
+import { MessageComponent } from './components/message/message.component';
+import { PerformanceDetailsComponent } from './components/performance-details/performance-details.component';
+import { ContractDetailsComponent } from './components/contract-details/contract-details.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { TheaterComponent } from './components/theater/theater.component';
     HeaderComponent,
     PerformanceComponent,
     ContractComponent,
-    TheaterComponent
+    TheaterComponent,
+    MessageComponent,
+    PerformanceDetailsComponent,
+    ContractDetailsComponent
   ],
   imports: [
     BrowserModule,

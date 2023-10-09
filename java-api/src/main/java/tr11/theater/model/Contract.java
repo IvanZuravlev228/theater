@@ -13,5 +13,9 @@ public class Contract {
     @OneToOne
     @JoinColumn(name = "actor_id")
     private Actor actor;
+    @OneToOne
+    @JoinColumn(name = "performance_id")
+    private Performance performance;
+    private String role;
     private Double salary;
 }

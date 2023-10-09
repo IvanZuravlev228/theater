@@ -1,3 +1,5 @@
+--liquibase formatted sql
+--changeset IvanZhuravlev:09-default-init-performances
 INSERT INTO performances(name, description, budget) VALUES
                                                         ('Shakespearean Play','A classic Shakespearean performance',5000.00),
                                                         ('Rock Concert','An electrifying rock concert',7500.50),
