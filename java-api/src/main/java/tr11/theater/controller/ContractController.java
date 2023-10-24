@@ -2,6 +2,8 @@ package tr11.theater.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,9 +29,9 @@ public class ContractController {
     private final RequestResponseMapper<Contract, ContractRequestDto, ContractResponseDto> contractMapper;
 
     @PostMapping
-    public ResponseEntity<ContractResponseDto> save(@RequestBody ContractRequestDto requestEntity) {
+    public ResponseEntity<ContractResponseDto> save(@RequestBody @Valid ContractRequestDto requestEntity) {
         return new ResponseEntity<>(contractMapper.toDto(
-                contractService.save(contractMapper.toModel(requestEntity))), HttpStatus.OK);
+                contractService.save(contractMapper.toModel(requestEntity))), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -47,7 +49,7 @@ public class ContractController {
 
     @PutMapping("/{prevId}")
     public ResponseEntity<ContractResponseDto> update(@PathVariable Long prevId,
-                                                      @RequestBody ContractRequestDto newEntity) {
+                                                      @RequestBody @Valid ContractRequestDto newEntity) {
         return new ResponseEntity<>(contractMapper.toDto(
                 contractService.update(prevId, contractMapper.toModel(newEntity))), HttpStatus.OK);
     }

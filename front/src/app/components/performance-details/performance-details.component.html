@@ -1,28 +1,32 @@
 <app-header></app-header>
 <app-message></app-message>
-<div class="performance-container">
-  <p>ID: {{mainPerformance.id}}</p>
-  <div class="per-title">
-    Name: {{mainPerformance.name}}
-  </div>
-  <div class="per-descr">
-    Desc: {{mainPerformance.description}}
-  </div>
-  <div class="per-budget">
-    Budget: {{mainPerformance.budget}}
-  </div>
+<main class="performance-container">
+<!--  <p>ID: {{mainPerformance.id}}</p>-->
+  <section class="performance">
 
-  <div class="actors-by-perfor">
-    <div *ngFor="let ac of actorWithContracts">
-      <p>ID: {{ ac.actor.id }}</p>
-      <p>Name: {{ ac.actor.name }}</p>
-      <p>Last name: {{ ac.actor.lastname }}</p>
-      <p>Experience: {{ ac.actor.experience }}</p>
-      <button (click)="getContractByActorId(ac)">contract</button>
-      <p>Role: {{ac.contract.role }}</p>
-      <p>Salary: {{ac.contract.salary }}</p>
+    <h2>{{mainPerformance.name}}</h2>
+
+    <div class="per-budget">
+      Budget: {{mainPerformance.budget}}$
     </div>
-  </div>
-</div>
+    <div class="per-descr">
+      {{mainPerformance.description}}
+    </div>
+  </section>
+
+  <section class="actors-by-perfor">
+    <h2>Actors</h2>
+    <div class="actors-container">
+      <article class="actor-item" *ngFor="let ac of actorWithContracts">
+        <!--      <p>ID: {{ ac.actor.id }}</p>-->
+        <p id="actor-title">{{ ac.actor.name }} {{ ac.actor.lastname }}</p>
+        <p>Experience: {{ ac.actor.experience }}</p>
+        <!--      <button (click)="getContractByActorId(ac)">contract</button>-->
+        <p>Role: {{ac.contract.role }}</p>
+        <p>Salary: {{ac.contract.salary }}$</p>
+      </article>
+    </div>
+  </section>
+</main>
 
 

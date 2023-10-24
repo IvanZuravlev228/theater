@@ -8,7 +8,6 @@ import {PrizesIdsRequestDto} from "../models/prize/PrizesIdsRequestDto";
   providedIn: 'root'
 })
 export class PrizeService {
-
   constructor(private http: HttpClient) { }
 
   getAllPrizesByIds(dto: PrizesIdsRequestDto) {

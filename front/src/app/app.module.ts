@@ -24,7 +24,7 @@ import { ContractDetailsComponent } from './components/contract-details/contract
     TheaterComponent,
     MessageComponent,
     PerformanceDetailsComponent,
-    ContractDetailsComponent
+    ContractDetailsComponent,
   ],
   imports: [
     BrowserModule,

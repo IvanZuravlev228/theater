@@ -10,8 +10,13 @@ import {ActorRegister} from "../models/actor/ActorRegister";
 export class ActorService {
   constructor(private http: HttpClient) { }
 
-  getAllActors() {
-    return this.http.get<Actor[]>(environment.backendURL + "/actors", {
+  getAllActors(page: number) {
+    if (page === - 1) {
+      return this.http.get<Actor[]>(environment.backendURL + "/actors", {
+        headers: {
+        }});
+    }
+    return this.http.get<Actor[]>(environment.backendURL + "/actors?page=" + page + "&size=5", {
       headers: {
       }});
   }
@@ -27,28 +32,24 @@ export class ActorService {
   deleteActorById(actorId: number) {
     return this.http.delete<void>(environment.backendURL + "/actors/" + actorId, {
       headers: {
-
       }});
   }
 
   getAllActorsByPerformanceId(perId: number) {
     return this.http.get<Actor[]>(environment.backendURL + "/actors/by-performance/" + perId, {
       headers: {
-
       }});
   }
 
   getAllActorsWithoutContractByPerformanceId(perId: number) {
     return this.http.get<Actor[]>(environment.backendURL + "/actors/by-performance/" + perId + "?hasContracts=false", {
       headers: {
-
       }});
   }
 
   getActorById(id: number) {
     return this.http.get<Actor>(environment.backendURL + "/actors/" + id, {
       headers: {
-
       }});
   }
 }

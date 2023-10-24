@@ -10,6 +10,7 @@ import {PrizesIdsRequestDto} from "../../models/prize/PrizesIdsRequestDto";
 import {Contract} from "../../models/contract/Contract";
 import {ContractService} from "../../services/contract.service";
 import {environment} from "../../../environment/environment";
+import {MessageService} from "../../services/message.service";
 
 @Component({
   selector: 'app-contract-details',
@@ -17,8 +18,6 @@ import {environment} from "../../../environment/environment";
   styleUrls: ['./contract-details.component.css']
 })
 export class ContractDetailsComponent implements OnInit {
-  performanceId: number = -1;
-  actorId: number = -1;
   performance: Performance = new Performance();
   actor: Actor = new Actor();
   prizes: Prize[] = [];
@@ -29,7 +28,8 @@ export class ContractDetailsComponent implements OnInit {
               private performanceService: PerformanceService,
               private actorService: ActorService,
               private prizeService: PrizeService,
-              private contractService: ContractService) {
+              private contractService: ContractService,
+              private messageService: MessageService) {
   }
 
   ngOnInit(): void {
@@ -68,7 +68,6 @@ export class ContractDetailsComponent implements OnInit {
     this.prizeService.getAllPrizesByIds(dto).subscribe({
       next: (prizes) => {
         this.prizes = prizes;
-        // console.log(prizes);
       },
       error: (error) => {
         console.log(error);
@@ -79,10 +78,16 @@ export class ContractDetailsComponent implements OnInit {
   signActor() {
     this.contractForAdd.actorId = this.actor.id;
     this.contractForAdd.performanceId = this.performance.id;
+    if (this.contractForAdd.role.length < 5 || this.contractForAdd.salary < 0) {
+      this.messageService.showMessage("Role length should be greater than 5 and salary greater then 0");
+      return;
+    }
 
     this.contractService.saveNewContract(this.contractForAdd).subscribe({
       next: () => {
         this.router.navigate([environment.rootURL + "/contracts"]);
+        this.contractForAdd.role = "";
+        this.contractForAdd.salary = 0;
       },
       error: (error) => {
         console.log(error);

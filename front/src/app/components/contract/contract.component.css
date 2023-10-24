@@ -1,0 +1,113 @@
+.all-perfor {
+  margin: 0 auto;
+  max-width: 850px;
+  background-color: #dcdcdc;
+}
+
+.all-header {
+  padding: 25px 0px 30px 10px;
+
+  /*font-size: 30px;*/
+  /*font-weight: bold;*/
+}
+
+.perfor-item {
+  padding: 10px;
+}
+
+.per-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+
+.name {
+  font-size: 25px;
+}
+
+.budget {
+  margin-left: 25px;
+  font-size: 20px;
+}
+
+.delete-perfor-button {
+  margin-left: 15px;
+  padding: 7px;
+  transition: background-color 0.5s ease;
+}
+
+.description {
+  margin-bottom: 5px;
+}
+
+.contract-info-button {
+  padding: 10px;
+  width: 100%;
+}
+
+.contract-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.actor-with-contract-container {
+  min-width: 300px;
+}
+
+.actor-with-contract-item {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+
+.icon-contract {
+  width: 13px;
+  height: 13px;
+}
+
+.actor-contract-info-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.get-contract-button, .break-contract-button {
+  background-color: #b36cb9;
+  color: white;
+  border-radius: 5px;
+  padding: 7px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  transition: background-color 0.5s ease;
+}
+
+.get-contract-button:hover {
+  background-color: #000;
+  transition: background-color 0.5s ease;
+}
+
+.break-contract-button:hover {
+  background-color: #ff4343;
+  transition: background-color 0.3s ease;
+}
+
+.actor-without-contract-container {
+  min-width: 300px;
+}
+
+.actor-without-contract-item {
+  border-bottom: 1px solid;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+

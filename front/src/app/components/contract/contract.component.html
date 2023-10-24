@@ -1,39 +1,62 @@
 <app-header></app-header>
 
-<div class="all-perfor">
-  <div class="perfor-item" *ngFor="let pac of performanceActorContract">
-    <h1>PERFORMANCE</h1>
-    <p>ID: {{pac.performance.id}}</p>
-    <p>name: {{pac.performance.name}}</p>
-    <p>description: {{pac.performance.description}}</p>
-    <p>budget: {{pac.performance.budget}}</p>
-    <button (click)="getContractInfo(pac)">show contract info</button>
-    <div class="contract-info">
-      <div class="actor-with-contract">
-        <h4>Actor with contract</h4>
-        <div *ngFor="let ac of pac.actorWithContract">
-          <p>ID: {{ ac.actor.id }}</p>
-          <p>Name: {{ ac.actor.name }}</p>
-          <p>Last name: {{ ac.actor.lastname }}</p>
-          <p>Experience: {{ ac.actor.experience }}</p>
-          <button (click)="getContractByActorAndPerforId(ac, pac.performance.id)">contract</button>
-          <p>Role: {{ac.contract.role }}</p>
-          <p>Salary: {{ac.contract.salary }}</p>
-          <button (click)="breakContract(ac.contract.id, pac.actorWithContract, pac.actorsWithoutContract)">break the contract with the actor</button>
-        </div>
+<main class="all-perfor">
+  <div class="all-header">
+    <h1>Performances and their actors</h1>
+  </div>
+  <section class="perfor-item" *ngFor="let pac of performanceActorContract">
+<!--    <p>ID: {{pac.performance.id}}</p>-->
+    <div class="per-header">
+      <div class="name">
+        <p>{{pac.performance.name}}</p>
       </div>
-      <div class="actor-without-contract">
-        <h4>Actor without contract</h4>
-        <div *ngFor="let actor of pac.actorsWithoutContract">
-          <p>ID: {{ actor.id }}</p>
-          <p>Name: {{ actor.name }}</p>
-          <p>Last name: {{ actor.lastname }}</p>
-          <p>Experience: {{ actor.experience }}</p>
-          <button (click)="signTheActor(pac.performance.id, actor.id, actor.prizesIds)">sign the actor</button>
-          <button (click)="deleteActorFromPerformanceQueue(actor.id, pac.performance.id, pac.actorsWithoutContract)">Delete actor from queue</button>
+      <div class="budget">
+        <p>Budget: {{pac.performance.budget}}$</p>
+      </div>
+      <button class="delete-perfor-button" *ngIf="pac.canDeletePerformance" (click)="deletePerformance(pac.performance.id)">delete</button>
+    </div>
+    <div class="description">
+      <p>{{pac.performance.description}}</p>
+    </div>
+    <button (click)="getContractInfo(pac)" class="contract-info-button">show contract info</button>
+    <div class="contract-info">
+      <div class="actor-with-contract-container">
+        <h4>Actor with a contract</h4>
+        <article class="actor-with-contract-item" *ngFor="let ac of pac.actorWithContract">
+<!--          <p>ID: {{ ac.actor.id }}</p>-->
+          <p>Full name: {{ ac.actor.name }} {{ ac.actor.lastname }}</p>
+          <p>Experience: {{ ac.actor.experience }} years</p>
+          <button class="get-contract-button" (click)="getContractByActorAndPerforId(ac, pac.performance.id)">contract</button>
+          <div class="actor-contract-info-container" *ngIf="ac.contract.role !== ''">
+            <div class="actor-contract-info">
+              <div class="contract-role">
+                <p>Role: {{ac.contract.role }}</p>
+              </div>
+              <div class="contract-salary">
+                <p>Salary: {{ac.contract.salary }}$</p>
+              </div>
+            </div>
+            <button class="break-contract-button" (click)="breakContract(ac.contract.id, pac.actorWithContract, pac.actorsWithoutContract)">break the contract</button>
+          </div>
+        </article>
+      </div>
+      <div class="actor-without-contract-container">
+        <h4>Actor without a contract</h4>
+        <article class="actor-without-contract-item" *ngFor="let actor of pac.actorsWithoutContract">
+<!--          <p>ID: {{ actor.id }}</p>-->
+          <p>Full name: {{ actor.name }} {{ actor.lastname }}</p>
+          <p>Experience: {{ actor.experience }} years</p>
+          <div class="buttons">
+            <button class="get-contract-button" (click)="signTheActor(pac.performance.id, actor.id, actor.prizesIds)">sign the actor</button>
+            <button class="break-contract-button" (click)="deleteActorFromPerformanceQueue(actor.id, pac.performance.id, pac.actorsWithoutContract)">delete actor from queue</button>
+          </div>
+        </article>
       </div>
     </div>
-    <br>
+
+  </section>
+  <div class="page-buttons">
+    <button class="previousPage" (click)="previousPage()"><-</button>
+    <button class="nextPage" (click)="nextPage()">-></button>
   </div>
-</div>
-</div>
+</main>

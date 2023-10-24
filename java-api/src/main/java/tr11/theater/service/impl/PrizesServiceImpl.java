@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import tr11.theater.exception.NotFoundException;
 import tr11.theater.model.Prizes;
 import tr11.theater.repository.PrizesRepository;
 import tr11.theater.service.PrizesService;
@@ -21,7 +22,7 @@ public class PrizesServiceImpl implements PrizesService {
     @Override
     public Prizes getById(Long id) {
         return prizesRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Can't find prizes by id: " + id));
+                new NotFoundException("Can't find prizes by id: " + id));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package tr11.theater.service;
 
+import org.springframework.data.domain.Pageable;
 import tr11.theater.model.Performance;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface PerformanceService {
 
     Performance getById(Long id);
 
-    List<Performance> getAll();
+    List<Performance> getAll(Pageable pageable);
 
     Performance addActorToPerformance(Long actorId, Long performanceId);
 

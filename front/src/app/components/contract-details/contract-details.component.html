@@ -1,39 +1,49 @@
-<app-message></app-message>
+<main class="main-container">
+  <h1>Sign in the actor</h1>
+  <section class="performance">
+    <h2>Performance</h2>
+    <div class="performance-item">
+<!--      <p>ID: {{performance.id}}</p>-->
+      <p>Name: {{performance.name}}</p>
+<!--      <p>Desc: {{performance.description}}</p>-->
+      <p>Budget: {{performance.budget}}</p>
+    </div>
+  </section>
 
-<div class="performance">
-  <h3>Performance</h3>
-  <div class="performance-item">
-    <p>ID: {{performance.id}}</p>
-    <p>Name: {{performance.name}}</p>
-    <p>Desc: {{performance.description}}</p>
-    <p>Budget: {{performance.budget}}</p>
-  </div>
-</div>
+  <section class="actor">
+    <h2>Actor</h2>
+    <div class="actor-item">
+<!--      <p>ID: {{actor.id}}</p>-->
+      <p>Name: {{actor.name}} {{actor.lastname}}</p>
+      <p>Experience: {{actor.experience}}</p>
+    </div>
+  </section>
 
-<div class="actor">
-  <h3>Actor</h3>
-  <div class="actor-item">
-    <p>ID: {{actor.id}}</p>
-    <p>Name: {{actor.name}}</p>
-    <p>Last name: {{actor.lastname}}</p>
-    <p>Experience: {{actor.experience}}</p>
-    <h3>Prizes:</h3>
-    <div class="prizes">
+  <section class="prizes">
+    <h2>Prizes</h2>
+    <div class="prizes-container">
       <div class="prize-item" *ngFor="let prize of prizes">
-        <p>Name: {{prize.name}}</p>
+        <p>{{prize.name}}</p>
         <p>Coefficient: {{prize.coefficient}}</p>
       </div>
     </div>
-  </div>
-  <form (ngSubmit)="signActor()" class="login-form">
-    <div class="form-group">
-      <label for="name">Role:</label>
-      <input type="text" id="name" [(ngModel)]="contractForAdd.role" [ngModelOptions]="{standalone: true}">
-    </div>
-    <div class="form-group">
-      <label for="lastname">Salary:</label>
-      <input type="text" id="lastname" [(ngModel)]="contractForAdd.salary" [ngModelOptions]="{standalone: true}">
-    </div>
-    <button type="submit" class="submit-button">sign actor</button>
-  </form>
-</div>
+  </section>
+
+  <section>
+    <form (ngSubmit)="signActor()" class="sign-actor-form">
+      <div class="role-input">
+        <label for="role">Role:</label>
+        <input type="text" id="role" [(ngModel)]="contractForAdd.role" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="salary-input">
+        <label for="salary">Salary:</label>
+        <input type="text" id="salary" [(ngModel)]="contractForAdd.salary" [ngModelOptions]="{standalone: true}">
+      </div>
+      <button type="submit" class="submit-button">sign actor</button>
+    </form>
+  </section>
+</main>
+
+<app-message></app-message>
+
+

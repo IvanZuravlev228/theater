@@ -3,6 +3,7 @@ package tr11.theater.service.impl;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import tr11.theater.exception.NotFoundException;
 import tr11.theater.model.Contract;
 import tr11.theater.repository.ContractRepository;
 import tr11.theater.service.ContractService;
@@ -20,13 +21,13 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public Contract getById(Long id) {
         return contractRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Can't find actor by id: " + id));
+                new NotFoundException("Can't find actor by id: " + id));
     }
 
     @Override
     public Contract getByActorAndPerformanceId(Long actorId, Long perId) {
         return contractRepository.findByActorAndPerformanceId(actorId, perId).orElseThrow(() ->
-                new RuntimeException("Can't find actor by actor's id: " + actorId));
+                new NotFoundException("Can't find actor by actor's id: " + actorId));
     }
 
     @Override

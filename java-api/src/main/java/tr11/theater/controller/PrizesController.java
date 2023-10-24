@@ -30,7 +30,7 @@ public class PrizesController {
     @PostMapping
     public ResponseEntity<PrizesResponseDto> save(@RequestBody PrizesRequestDto requestEntity) {
         return new ResponseEntity<>(prizesMapper.toDto(
-                prizesService.save(prizesMapper.toModel(requestEntity))), HttpStatus.OK);
+                prizesService.save(prizesMapper.toModel(requestEntity))), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")

@@ -1,0 +1,68 @@
+.main-container {
+  margin: 50px auto;
+  max-width: 500px;
+  background-color: #dcdcdc;
+  padding: 20px;
+}
+
+.performance, .actor, .prizes {
+  border-bottom: 1px solid;
+  padding: 10px;
+}
+
+.actor {
+
+}
+
+.prizes {
+}
+
+.prizes-container {
+}
+
+.prize-item {
+  background-color: #cccccc;
+  border: 1px solid black;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+
+/* Основной контейнер формы */
+.sign-actor-form {
+  /*background-color: #000; !* Черный цвет фона *!*/
+  /*color: #fff; !* Белый цвет текста *!*/
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Стили для полей ввода и меток */
+.role-input, .salary-input {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"] {
+  width: 80%;
+  padding: 10px;
+  border: 1px solid #b36cb9; /* Фиолетовая граница */
+  border-radius: 5px;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #b36cb9;
+  color: white;
+  border-radius: 5px;
+  padding: 15px 0px;
+  transition: background-color 0.5s ease;
+}
+
+.submit-button:hover {
+  background-color: #000;
+  transition: background-color 0.5s ease;
+}

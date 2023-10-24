@@ -6,5 +6,4 @@ CREATE TABLE prizes_actors (
                                FOREIGN KEY (prizes_id) REFERENCES prizes (id),
                                FOREIGN KEY (actors_id) REFERENCES actors (id)
 );
-
 --rollback DROP TABLE prizes_actors;
