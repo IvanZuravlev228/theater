@@ -1,15 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {Performance} from "../../models/performance/Performance";
-import {PerformanceService} from "../../services/performance.service";
-import {ContractService} from "../../services/contract.service";
-import {Actor} from "../../models/actor/Actor";
-import {ActorService} from "../../services/actor.service";
-import {ActorWithContract} from "../../models/actor/ActorWithContract";
-import {MessageService} from "../../services/message.service";
-import {Contract} from "../../models/contract/Contract";
-import {PerformanceActorContract} from "../../models/performance/PerformanceActorContract";
 import {Router} from "@angular/router";
 import {environment} from "../../../environment/environment";
+import {PerformanceActorContract} from "../../models/performance/PerformanceActorContract";
+import {PerformanceService} from "../../services/performance.service";
+import {ContractService} from "../../services/contract.service";
+import {ActorService} from "../../services/actor.service";
+import {MessageService} from "../../services/message.service";
+import {ActorWithContract} from "../../models/actor/ActorWithContract";
+import {Contract} from "../../models/contract/Contract";
+import {Actor} from "../../models/actor/Actor";
 
 @Component({
   selector: 'app-contract',

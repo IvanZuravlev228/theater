@@ -1,7 +1,8 @@
 .all-perfor {
-  margin: 0 auto;
+  margin: 15px auto;
   max-width: 850px;
-  background-color: #dcdcdc;
+  padding: 15px;
+  background-color: rgba(217, 217, 217, 0.5);
 }
 
 .all-header {

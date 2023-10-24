@@ -1,0 +1,38 @@
+.main-container {
+  background-image: url(https://api.time.com/wp-content/uploads/2019/11/time-best-of-culture-2019-theater-hadestown.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  max-width: 100%;
+  min-height: 1200px;
+}
+
+.header-section, .about {
+  max-width: 70%;
+  margin: 50px auto 20px auto;
+  font-size: 20px;
+  /*background-color: #00c900;*/
+}
+
+.about {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 150px;
+}
+
+.main-item, .about-item {
+  color: white;
+  border-radius: 10px;
+  border: 1px #8a8a8a solid;
+  background-color: rgba(128, 128, 128, 0.5);
+  max-width: 40%;
+  padding: 50px 25px;
+  transition: all 0.3s ease;
+}
+
+
+
+.main-item:hover, .about-item:hover {
+  padding: 50px 75px;
+  background-color: rgba(166, 166, 166, 0.5);
+}
