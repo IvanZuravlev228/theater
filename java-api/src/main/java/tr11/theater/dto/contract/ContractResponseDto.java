@@ -6,5 +6,7 @@ import lombok.Data;
 public class ContractResponseDto {
     private Long id;
     private Long actorId;
+    private Long performanceId;
+    private String role;
     private Double salary;
 }

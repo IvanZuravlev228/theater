@@ -23,25 +23,22 @@ import tr11.theater.service.mapper.RequestResponseMapper;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/prizes")
-public class PrizesController implements DefaultCrudController<PrizesRequestDto, PrizesResponseDto> {
+public class PrizesController {
     private final PrizesService prizesService;
     private final RequestResponseMapper<Prizes, PrizesRequestDto, PrizesResponseDto> prizesMapper;
 
     @PostMapping
-    @Override
     public ResponseEntity<PrizesResponseDto> save(@RequestBody PrizesRequestDto requestEntity) {
         return new ResponseEntity<>(prizesMapper.toDto(
                 prizesService.save(prizesMapper.toModel(requestEntity))), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    @Override
     public ResponseEntity<PrizesResponseDto> getById(@PathVariable Long id) {
         return new ResponseEntity<>(prizesMapper.toDto(prizesService.getById(id)), HttpStatus.OK);
     }
 
     @GetMapping
-    @Override
     public ResponseEntity<List<PrizesResponseDto>> getAll() {
         return new ResponseEntity<>(prizesService.getAll()
                 .stream()
@@ -50,7 +47,6 @@ public class PrizesController implements DefaultCrudController<PrizesRequestDto,
     }
 
     @PutMapping("/{prevId}")
-    @Override
     public ResponseEntity<PrizesResponseDto> update(@PathVariable Long prevId,
                                                     @RequestBody PrizesRequestDto newEntity) {
         return new ResponseEntity<>(prizesMapper.toDto(
@@ -58,7 +54,6 @@ public class PrizesController implements DefaultCrudController<PrizesRequestDto,
     }
 
     @DeleteMapping("/{id}")
-    @Override
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         prizesService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

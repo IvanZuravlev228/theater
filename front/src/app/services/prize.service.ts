@@ -12,12 +12,17 @@ export class PrizeService {
   constructor(private http: HttpClient) { }
 
   getAllPrizesByIds(dto: PrizesIdsRequestDto) {
-
     const body = JSON.stringify(dto);
-    console.log("ids for send: " + body);
     return this.http.post<Prize[]>(environment.backendURL + "/prizes/by-actor", body, {
       headers: {
         "Content-Type": "application/json"
       }})
+  }
+
+  getAllPrizes() {
+    return this.http.get<Prize[]>(environment.backendURL + "/prizes", {
+      headers: {
+        "Content-Type": "application/json"
+      }});
   }
 }

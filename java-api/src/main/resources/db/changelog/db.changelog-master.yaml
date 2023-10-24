@@ -23,3 +23,9 @@ databaseChangeLog:
       file: /db/changelog/changes/11-default-init-performances_actors.sql
   - include:
       file: /db/changelog/changes/12-default-init-prizes_actors.sql
+#  - include:
+#      file: /db/changelog/changes/13-create-calc-salary-function.sql
+#  - include:
+#      file: /db/changelog/changes/14-create-insert-procedure.sql
+#  - include:
+#      file: /db/changelog/changes/15-create-insert-salary-trigger.sql

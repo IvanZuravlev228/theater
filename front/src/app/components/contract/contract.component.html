@@ -1,2 +1,39 @@
 <app-header></app-header>
-<p>contract works!</p>
+
+<div class="all-perfor">
+  <div class="perfor-item" *ngFor="let pac of performanceActorContract">
+    <h1>PERFORMANCE</h1>
+    <p>ID: {{pac.performance.id}}</p>
+    <p>name: {{pac.performance.name}}</p>
+    <p>description: {{pac.performance.description}}</p>
+    <p>budget: {{pac.performance.budget}}</p>
+    <button (click)="getContractInfo(pac)">show contract info</button>
+    <div class="contract-info">
+      <div class="actor-with-contract">
+        <h4>Actor with contract</h4>
+        <div *ngFor="let ac of pac.actorWithContract">
+          <p>ID: {{ ac.actor.id }}</p>
+          <p>Name: {{ ac.actor.name }}</p>
+          <p>Last name: {{ ac.actor.lastname }}</p>
+          <p>Experience: {{ ac.actor.experience }}</p>
+          <button (click)="getContractByActorAndPerforId(ac, pac.performance.id)">contract</button>
+          <p>Role: {{ac.contract.role }}</p>
+          <p>Salary: {{ac.contract.salary }}</p>
+          <button (click)="breakContract(ac.contract.id, pac.actorWithContract, pac.actorsWithoutContract)">break the contract with the actor</button>
+        </div>
+      </div>
+      <div class="actor-without-contract">
+        <h4>Actor without contract</h4>
+        <div *ngFor="let actor of pac.actorsWithoutContract">
+          <p>ID: {{ actor.id }}</p>
+          <p>Name: {{ actor.name }}</p>
+          <p>Last name: {{ actor.lastname }}</p>
+          <p>Experience: {{ actor.experience }}</p>
+          <button (click)="signTheActor(pac.performance.id, actor.id, actor.prizesIds)">sign the actor</button>
+          <button (click)="deleteActorFromPerformanceQueue(actor.id, pac.performance.id, pac.actorsWithoutContract)">Delete actor from queue</button>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>
+</div>

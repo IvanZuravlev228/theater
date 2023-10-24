@@ -1,2 +1,83 @@
 <app-header></app-header>
-<p>performance works!</p>
+<app-message></app-message>
+<div class="perfor-infor">
+  <div class="all-perfor">
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>name</th>
+        <th>description</th>
+        <th>budget</th>
+        <th>more</th>
+        <th>actors</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let per of performances">
+        <td>{{ per.id }}</td>
+        <td>{{ per.name }}</td>
+        <td>{{ per.description }}</td>
+        <td>{{ per.budget }}</td>
+<!--        <td><button (click)="showActors(per.id)">show actors</button></td>-->
+        <td><button (click)="showMore(per.id)">show more</button></td>
+<!--        <td><button (click)="deleteActor(actor.id)">del</button></td>-->
+        <td><button (click)="showAddForm(per)">add actors</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngFor="let actor of actorsForUpdatePer" class="prize-checkbox">
+    <div class="prize-checkbox-container">
+      <div class="prize-checkbox-text">
+        {{ actor.id }} | {{ actor.name }} | {{ actor.experience }}
+      </div>
+      <div class="prize-checkbox-input">
+        <input type="checkbox" [(ngModel)]="actor.selected" [ngModelOptions]="{standalone: true}">
+      </div>
+    </div>
+  </div>
+  <button (click)="addActorsToPerfor()">add actor</button>
+</div>
+
+<div class="actors-by-perfor">
+  <div *ngFor="let actor of actorsByPerformance">
+    <p>ID: {{ actor.id }}</p>
+    <p>Name: {{ actor.name }}</p>
+    <p>Experience: {{ actor.experience }}</p>
+  </div>
+</div>
+
+
+
+<app-message></app-message>
+<div class="new-actor">
+  <form (ngSubmit)="addNewPerformance()" class="login-form">
+    <h3>Registration</h3>
+    <div class="form-group">
+      <label for="name">name:</label>
+      <input type="text" id="name" [(ngModel)]="performanceForAdd.name" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <label for="lastname">description:</label>
+      <input type="text" id="lastname" [(ngModel)]="performanceForAdd.description" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <label for="experience">budget:</label>
+      <input type="text" id="experience" [(ngModel)]="performanceForAdd.budget" [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="form-group">
+      <div *ngFor="let actor of actorsForNewPer" class="prize-checkbox">
+        <div class="prize-checkbox-container">
+          <div class="prize-checkbox-text">
+            {{ actor.id }} | {{ actor.name }} | {{ actor.experience }}
+          </div>
+          <div class="prize-checkbox-input">
+            <input type="checkbox" [(ngModel)]="actor.selected" [ngModelOptions]="{standalone: true}">
+          </div>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="submit-button">create!</button>
+  </form>
+</div>

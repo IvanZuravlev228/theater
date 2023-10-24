@@ -11,7 +11,11 @@ public interface ActorService {
 
     List<Actor> getAll();
 
+    List<Actor> getAllWithoutContract();
+
     Actor update(Long prevActorId, Actor actorForUpdate);
 
     void delete(Long id);
+
+    List<Actor> getAllByPerformanceId(Long perId);
 }

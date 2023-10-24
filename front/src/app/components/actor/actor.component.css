@@ -21,7 +21,7 @@ thead th {
   background-color: #b36cb9; /* Красный цвет */
   color: #fff;
   font-weight: bold;
-  text-align: left;
+  text-align: center;
   padding: 10px;
 }
 
@@ -29,6 +29,7 @@ thead th {
 td {
   padding: 10px;
   border-bottom: 1px solid #ddd; /* Линии-разделители между строками */
+  text-align: center;
 }
 
 /* Стили для кнопок "show prizes" */
@@ -58,4 +59,91 @@ button:hover {
 .prizes-actor p {
   margin: 0;
   font-weight: bold;
+}
+
+
+
+.new-actor {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  width: 500px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #808080;
+}
+
+.login-form h3 {
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+}
+
+.login-form .form-group {
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.important-message {
+  color: #ff3c3c;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.login-form .form-group label {
+  color: #fff;
+  font-size: 16px;
+}
+
+.login-form .form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.login-form .prize-checkbox {
+  /*margin-bottom: 5px;*/
+}
+.prize-checkbox-container {
+  display: flex;
+  margin-bottom: 15px;
+  justify-content: space-around;
+}
+
+.prize-checkbox-text {
+  font-size: 16px;
+  flex: 75%;
+}
+
+.login-form .prize-checkbox input {
+  /*margin-left: 15px;*/
+}
+
+.login-form .prize-checkbox label {
+  color: #fff;
+  font-size: 14px;
+}
+
+.login-form .submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #b36cb9;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.login-form .submit-button:hover {
+  background-color: #9a5c9f;
+}
+
+.submit-button:disabled {
+  font-size: 50px;
 }

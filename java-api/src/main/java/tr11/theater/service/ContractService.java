@@ -9,7 +9,7 @@ public interface ContractService {
 
     Contract getById(Long id);
 
-    Contract getByActorId(Long actorId);
+    Contract getByActorAndPerformanceId(Long actorId, Long perId);
 
     List<Contract> getAll();
 

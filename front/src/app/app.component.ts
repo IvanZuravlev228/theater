@@ -12,6 +12,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.router.navigate([environment.rootURL]);
+    this.router.navigate([environment.rootURL + "/contracts"]);
   }
 }
