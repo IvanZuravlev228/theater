@@ -36,6 +36,10 @@
   transition: background-color 0.5s ease;
 }
 
+.page-buttons {
+  margin-bottom: 10px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
