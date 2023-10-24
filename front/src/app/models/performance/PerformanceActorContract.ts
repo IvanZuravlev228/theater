@@ -6,4 +6,5 @@ export class PerformanceActorContract {
   performance: Performance = new Performance();
   actorsWithoutContract: Actor[] = [];
   actorWithContract: ActorWithContract[] = [];
+  canDeletePerformance: boolean = false;
 }

@@ -11,17 +11,15 @@ export class ContractService {
 
   constructor(private http: HttpClient) { }
 
-  getContractById(id: number) {
-    return this.http.get<Contract>(environment.backendURL + "/contracts/" + id, {
-      headers: {
-
-      }});
-  }
+  // getContractById(id: number) {
+  //   return this.http.get<Contract>(environment.backendURL + "/contracts/" + id, {
+  //     headers: {
+  //     }});
+  // }
 
   getContractByActorAndPerformanceId(actorId: number, perId: number) {
     return this.http.get<Contract>(environment.backendURL + "/contracts/actor/" + actorId + "/performance/" + perId, {
       headers: {
-
       }});
   }
 
@@ -36,7 +34,6 @@ export class ContractService {
   deleteContract(contractId: number) {
     return this.http.delete<void>(environment.backendURL + "/contracts/" + contractId, {
       headers: {
-
       }});
   }
 }

@@ -1,8 +1,12 @@
 package tr11.theater.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import tr11.theater.exception.NotFoundException;
 import tr11.theater.model.Actor;
 import tr11.theater.model.Performance;
 import tr11.theater.repository.PerformanceRepository;
@@ -23,12 +27,12 @@ public class PerformanceServiceImpl implements PerformanceService {
     @Override
     public Performance getById(Long id) {
         return performanceRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Can't find performance by id: " + id));
+                new NotFoundException("Can't find performance by id: " + id));
     }
 
     @Override
-    public List<Performance> getAll() {
-        return performanceRepository.findAll();
+    public List<Performance> getAll(Pageable pageable) {
+        return performanceRepository.findAll(pageable).stream().collect(Collectors.toList());
     }
 
     @Override

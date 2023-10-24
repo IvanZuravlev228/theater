@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PerformanceService} from "../../services/performance.service";
 import {Performance} from "../../models/performance/Performance";
 import {ActorService} from "../../services/actor.service";
@@ -8,6 +8,7 @@ import {MessageService} from "../../services/message.service";
 import {ActorWithContract} from "../../models/actor/ActorWithContract";
 import {ContractService} from "../../services/contract.service";
 import {Contract} from "../../models/contract/Contract";
+import {environment} from "../../../environment/environment";
 
 @Component({
   selector: 'app-performance-details',
@@ -16,7 +17,6 @@ import {Contract} from "../../models/contract/Contract";
 })
 export class PerformanceDetailsComponent implements OnInit {
   mainPerformance: Performance = new Performance();
-  actorsByPerformance: Actor[] = [];
   actorWithContracts: ActorWithContract[] = [];
   performanceId: number = -1;
 
@@ -41,43 +41,33 @@ export class PerformanceDetailsComponent implements OnInit {
           this.mainPerformance = per;
         },
         error: () => {
-
         }
-      })
+      });
   }
 
   getActorsByPerformanceId(perId: number) {
     this.actorService.getAllActorsByPerformanceId(perId).subscribe({
       next: (actors: Actor[]) => {
-
         actors.forEach(actor => {
-          // this.contractService.getContractByActorAndPerformanceId(actor.id, perId).subscribe({
-          //   next: (contract) => {
-          //     const actorWithContract: ActorWithContract = {
-          //       actor: actor,
-          //       contract: contract
-          //     };
-          //     this.actorWithContracts.push(actorWithContract);
-          //   }
-          // })
             const actorWithContract: ActorWithContract = {
-                    actor: actor,
-                    contract: new Contract()
-                  };
-                  this.actorWithContracts.push(actorWithContract);
-            })
+              actor: actor,
+              contract: new Contract()
+            };
+            this.actorWithContracts.push(actorWithContract);
+            this.getContractByActorId(actorWithContract);
+        });
       },
       error: (error) => {
         this.messageService.showMessage(error);
       }
-    })
+    });
   }
 
   getContractByActorId(ac: ActorWithContract) {
     this.contractService.getContractByActorAndPerformanceId(ac.actor.id, this.performanceId).subscribe({
       next: (contract) => {
-        console.log(contract);
         ac.contract = contract;
+        this.mainPerformance.budget = this.mainPerformance.budget - contract.salary;
       },
       error: (error) => {
         this.messageService.showMessage("May be this actor doesn't have a contract");

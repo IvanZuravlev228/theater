@@ -1,9 +1,11 @@
 package tr11.theater.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +22,6 @@ import tr11.theater.service.mapper.RequestResponseMapper;
 public class ActorController {
     private final ActorService actorService;
     private final RequestResponseMapper<Actor, ActorRequestDto, ActorResponseDto> actorMapper;
-    private final ActorRepository actorRepository;
-
-    @PostMapping
-    public ResponseEntity<ActorResponseDto> save(@RequestBody ActorRequestDto requestEntity) {
-        return new ResponseEntity<>(actorMapper.toDto(actorService.save(actorMapper.toModel(requestEntity))), HttpStatus.OK);
-    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ActorResponseDto> getById(@PathVariable Long id) {
@@ -33,23 +29,35 @@ public class ActorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ActorResponseDto>> getAll(@RequestParam(defaultValue = "false") Boolean withoutContact) {
-        List<Actor> actors;
-        if (withoutContact) {
-            actors = actorService.getAllWithoutContract();
-        } else {
-            actors = actorService.getAll();
-        }
-        return new ResponseEntity<>(actors
+    public ResponseEntity<List<ActorResponseDto>> getAll(Pageable pageable,
+                                                         @RequestParam(defaultValue = "false") Boolean withoutContact) {
+//        List<Actor> actors = withoutContact ? actorService.getAllWithoutContract(pageable) : actorService.getAll(pageable);
+        return new ResponseEntity<>(actorService.getAll(pageable)
                 .stream()
                 .map(actorMapper::toDto)
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
+    @GetMapping("/by-performance/{id}")
+    public ResponseEntity<List<ActorResponseDto>> getAllByPerformanceId(@PathVariable Long id,
+                                                                        @RequestParam(defaultValue = "true") Boolean hasContracts) {
+        List<Actor> actors = hasContracts ? actorService.findAllWithContractWithPerformance(id) : actorService.findAllWithoutContractWithPerformance(id);
+        return new ResponseEntity<>(actors
+                .stream()
+                .map(actorMapper::toDto)
+                .collect(Collectors.toList()), HttpStatus.OK);
+
+    }
+
+    @PostMapping
+    public ResponseEntity<ActorResponseDto> save(@RequestBody @Valid ActorRequestDto requestEntity) {
+        return new ResponseEntity<>(actorMapper.toDto(actorService.save(actorMapper.toModel(requestEntity))), HttpStatus.CREATED);
+    }
+
     @PutMapping("/{prevId}")
-    public ResponseEntity<ActorResponseDto> update(@PathVariable Long prevId, @RequestBody ActorRequestDto newEntity) {
-        return new ResponseEntity<>(actorMapper.toDto(
-                actorService.update(prevId, actorMapper.toModel(newEntity))), HttpStatus.OK);
+    public ResponseEntity<ActorResponseDto> update(@PathVariable Long prevId,
+                                                   @RequestBody @Valid ActorRequestDto newEntity) {
+        return new ResponseEntity<>(actorMapper.toDto(actorService.update(prevId, actorMapper.toModel(newEntity))), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
@@ -57,21 +65,4 @@ public class ActorController {
         actorService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-    @GetMapping("/by-performance/{id}")
-    public ResponseEntity<List<ActorResponseDto>> getAllByPerformanceId(@PathVariable Long id,
-                                                                        @RequestParam(defaultValue = "true") Boolean hasContracts) {
-        List<Actor> actors;
-        if (hasContracts) {
-            actors = actorRepository.findAllWithContractWithPerformance(id);
-        } else {
-            actors = actorRepository.findAllWithoutContractWithPerformance(id);
-        }
-        return new ResponseEntity<>(actors
-                .stream()
-                .map(actorMapper::toDto)
-                .collect(Collectors.toList()), HttpStatus.OK);
-    }
-
-
 }

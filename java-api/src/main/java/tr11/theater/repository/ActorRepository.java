@@ -19,7 +19,7 @@ public interface ActorRepository extends JpaRepository<Actor, Long> {
             "JOIN performances_actors pa ON a.id = pa.actors_id " +
             "LEFT JOIN contracts c ON a.id = c.actor_id AND pa.performances_id = c.performance_id " +
             "WHERE c.id IS NULL;", nativeQuery = true)
-    List<Actor> findAllWithoutContract();
+    List<Actor> findAllWithoutContract(int pageSize, int page);
 
     @Query(value = "SELECT a.* " +
             "FROM actors a " +

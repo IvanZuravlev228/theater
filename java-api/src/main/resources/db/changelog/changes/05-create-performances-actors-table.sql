@@ -7,5 +7,4 @@ CREATE TABLE performances_actors (
                                      FOREIGN KEY (performances_id) REFERENCES performances (id),
                                      FOREIGN KEY (actors_id) REFERENCES actors (id)
 );
-
 --rollback DROP TABLE performances_actors;

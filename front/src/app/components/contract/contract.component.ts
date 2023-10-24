@@ -17,11 +17,8 @@ import {environment} from "../../../environment/environment";
   styleUrls: ['./contract.component.css']
 })
 export class ContractComponent implements OnInit{
-  // performances: Performance[] = [];
-  // actorWithContracts: ActorWithContract[] = [];
-  // actorWithoutContracts: Actor[] = [];
-
   performanceActorContract: PerformanceActorContract[] = [];
+  indexPage: number = 0;
 
   constructor(private performanceService: PerformanceService,
               private contractService: ContractService,
@@ -35,13 +32,20 @@ export class ContractComponent implements OnInit{
   }
 
   getAllPerformance() {
-    this.performanceService.getAllPerformance().subscribe({
+
+    this.performanceService.getAllPerformance(this.indexPage).subscribe({
       next: (performances ) => {
+        if (performances.length === 0) {
+          this.indexPage--;
+          return;
+        }
+        this.performanceActorContract.splice(0);
         performances.forEach(performance => {
           const perActCont: PerformanceActorContract = {
             performance: performance,
             actorsWithoutContract: [],
-            actorWithContract: []
+            actorWithContract: [],
+            canDeletePerformance: false
           };
           this.performanceActorContract.push(perActCont);
         })
@@ -52,11 +56,21 @@ export class ContractComponent implements OnInit{
     })
   }
 
+  nextPage() {
+    this.indexPage++;
+    this.getAllPerformance();
+  }
+
+  previousPage() {
+    if (this.indexPage !== 0) {
+      this.indexPage--;
+      this.getAllPerformance();
+    }
+  }
 
   getContractInfo(pac: PerformanceActorContract) {
     this.actorService.getAllActorsWithoutContractByPerformanceId(pac.performance.id).subscribe({
       next: (actors ) => {
-        // this.actorWithoutContracts = actors;
         pac.actorsWithoutContract = actors;
       },
       error: (error) => {
@@ -68,7 +82,6 @@ export class ContractComponent implements OnInit{
       next: (actors ) => {
         actors.forEach(actor => {
           const existingActor = pac.actorWithContract.find(a => a.actor.id === actor.id);
-          console.log(!existingActor);
           if (!existingActor) {
             const actorWithContract: ActorWithContract = {
               actor: actor,
@@ -81,7 +94,14 @@ export class ContractComponent implements OnInit{
       error: (error) => {
         console.log(error);
       }
-    })
+    });
+    this.setShowDeleteButton(pac);
+  }
+
+  setShowDeleteButton(pac: PerformanceActorContract) {
+    setTimeout(() => {
+      pac.canDeletePerformance = pac.actorWithContract.length === 0 && pac.actorsWithoutContract.length === 0;
+    }, 3000); // 3000 миллисекунд (3 секунды)
   }
 
   getContractByActorAndPerforId(ac: ActorWithContract, performanceId: number) {
@@ -126,14 +146,23 @@ export class ContractComponent implements OnInit{
     this.performanceService.deleteActorFromPerformanceQueue(actorId, perforId).subscribe({
       next: () => {
         const index = actorsWithoutContract.findIndex(actor => actor.id === actorId);
-
-        // Если актер найден (index не равен -1), удаляем его из массива
         if (index !== -1) {
           actorsWithoutContract.splice(index, 1);
         }
       },
       error: (error) => {
         this.messageService.showMessage("May be this actor doesn't have a contract");
+      }
+    })
+  }
+
+  deletePerformance(perforId: number) {
+    this.performanceService.deletePerformance(perforId).subscribe({
+      next: () => {
+        this.router.navigate([environment.rootURL + "/performances"]);
+      },
+      error: (error) => {
+        // this.messageService.showMessage("May be this actor doesn't have a contract");
       }
     })
   }

@@ -1,0 +1,113 @@
+.perfor-body {
+  margin: 10px auto;
+  max-width: 1000px;
+  margin-top: 20px;
+}
+
+.perfor-infor {
+}
+
+.all-perfor {
+}
+
+.add-actors-block {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 7px;
+}
+
+.add-actor {
+  display: flex;
+  padding: 7px;
+  margin: 5px;
+  background-color: #e3e3e3;
+  border-radius: 3px;
+}
+
+.add-button {
+  background-color: #b36cb9;
+  border-radius: 5px;
+  padding: 3px 15px;
+  transition: background-color 0.5s ease;
+}
+
+.add-button:hover {
+  background-color: #000;
+  transition: background-color 0.5s ease;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+thead th {
+  background-color: #b36cb9; /* Красный цвет */
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Стили для ячеек таблицы */
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd; /* Линии-разделители между строками */
+  text-align: center;
+}
+
+.create-actor {
+  background-color: #00c900;
+  width: 100%;
+  text-align: center;
+  padding: 1px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.new-perfor-form {
+  padding: 10px;
+  background-color: white;
+}
+
+.name-budget {
+  display: flex;
+}
+
+#name {
+  margin-right: 20px;
+  margin-left: 7px;
+  width: 100px;
+  padding: 4px;
+}
+
+#budget {
+  margin-left: 7px;
+  width: 100px;
+  padding: 4px;
+}
+
+.description {
+  margin-top: 10px;
+}
+
+#description {
+  min-width: 95%;
+  max-width: 700px;
+  min-height: 25px;
+  max-height: 100px;
+}
+
+.create-new-perfor {
+  padding: 7px 15px;
+}
+
+
+
+
+
+
+
+
+

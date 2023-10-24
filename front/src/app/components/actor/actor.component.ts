@@ -5,7 +5,6 @@ import {Prize} from "../../models/prize/Prize";
 import {PrizeService} from "../../services/prize.service";
 import {PrizesIdsRequestDto} from "../../models/prize/PrizesIdsRequestDto";
 import {ActorRegister} from "../../models/actor/ActorRegister";
-import {PrizeRequest} from "../../models/prize/PrizeRequest";
 import {MessageService} from "../../services/message.service";
 
 @Component({
@@ -19,6 +18,7 @@ export class ActorComponent implements OnInit{
   actorRegister: ActorRegister = new ActorRegister();
   prizesForRegisterActor: Prize[] = [];
   prizes: Prize[] = [];
+  indexPage: number = 0;
 
   constructor(private actorService: ActorService,
               private prizesService: PrizeService,
@@ -31,10 +31,13 @@ export class ActorComponent implements OnInit{
   }
 
   getAllActors() {
-    this.actorService.getAllActors().subscribe({
+    this.actorService.getAllActors(this.indexPage).subscribe({
       next: (actors) => {
-        this.actors = actors;
-        console.log(this.actors[0].prizesIds);
+        if (actors.length !== 0) {
+          this.actors = actors;
+        } else {
+          this.indexPage--;
+        }
       },
       error: (error) => {
         console.log(error);
@@ -111,18 +114,30 @@ export class ActorComponent implements OnInit{
     }
   }
 
-  deleteActor(actorId: number) {
-    this.actorService.deleteActorById(actorId).subscribe({
-      next: () => {
-        const index = this.actors.findIndex(actor => actor.id === actorId);
-        if (index !== -1) {
-          this.actors.splice(index, 1);
-        }
-      },
-      error: (error) => {
-        console.log(error);
-        this.messageService.showMessage("Something went wrong. May be this actor is playing in some performance?")
-      }
-    })
+  // deleteActor(actorId: number) {
+  //   this.actorService.deleteActorById(actorId).subscribe({
+  //     next: () => {
+  //       const index = this.actors.findIndex(actor => actor.id === actorId);
+  //       if (index !== -1) {
+  //         this.actors.splice(index, 1);
+  //       }
+  //     },
+  //     error: (error) => {
+  //       console.log(error);
+  //       this.messageService.showMessage("Something went wrong. May be this actor is playing in some performance?")
+  //     }
+  //   })
+  // }
+
+  previousPage() {
+    if (this.indexPage !== 0) {
+      this.indexPage--;
+      this.getAllActors();
+    }
+  }
+
+  nextPage() {
+    this.indexPage++;
+    this.getAllActors();
   }
 }

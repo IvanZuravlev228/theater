@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import tr11.theater.dto.performance.PerformanceRequestDto;
 import tr11.theater.dto.performance.PerformancesResponseDto;
-import tr11.theater.dto.prizes.PrizesRequestDto;
 import tr11.theater.model.Actor;
 import tr11.theater.model.Performance;
 import tr11.theater.service.ActorService;
