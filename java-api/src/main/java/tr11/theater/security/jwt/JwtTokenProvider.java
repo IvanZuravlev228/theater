@@ -80,7 +80,7 @@ public class JwtTokenProvider {
             Jws<Claims> claims = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
             return claims.getBody().getExpiration().after(new Date());
         } catch (JwtException | IllegalArgumentException e) {
-            throw new InvalidJwtException("Expire or invalid JWT token", e);
+            throw new InvalidJwtException("Expire or invalid JWT token");
         }
     }
 }

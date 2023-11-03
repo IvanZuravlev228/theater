@@ -148,11 +148,8 @@ export class ActorComponent implements OnInit{
 
   private errorHandle(status: number) {
     console.log(status);
-    if (status === 500) {
-      this.messageService.showMessage("You may have to re-authenticate");
-    }
-    if (status === 429) {
-      this.messageService.showMessage("You have reached your request limit (10 req/min)");
+    if (status === 0) {
+      this.messageService.showMessage("Maybe you should re authenticate");
     }
     if (status === 400) {
       this.messageService.showMessage("Something went wrong");
