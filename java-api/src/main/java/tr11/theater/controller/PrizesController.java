@@ -27,12 +27,6 @@ public class PrizesController {
     private final PrizesService prizesService;
     private final RequestResponseMapper<Prizes, PrizesRequestDto, PrizesResponseDto> prizesMapper;
 
-    @PostMapping
-    public ResponseEntity<PrizesResponseDto> save(@RequestBody PrizesRequestDto requestEntity) {
-        return new ResponseEntity<>(prizesMapper.toDto(
-                prizesService.save(prizesMapper.toModel(requestEntity))), HttpStatus.CREATED);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<PrizesResponseDto> getById(@PathVariable Long id) {
         return new ResponseEntity<>(prizesMapper.toDto(prizesService.getById(id)), HttpStatus.OK);
@@ -41,6 +35,20 @@ public class PrizesController {
     @GetMapping
     public ResponseEntity<List<PrizesResponseDto>> getAll() {
         return new ResponseEntity<>(prizesService.getAll()
+                .stream()
+                .map(prizesMapper::toDto)
+                .collect(Collectors.toList()), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<PrizesResponseDto> save(@RequestBody PrizesRequestDto requestEntity) {
+        return new ResponseEntity<>(prizesMapper.toDto(
+                prizesService.save(prizesMapper.toModel(requestEntity))), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/by-actor")
+    public ResponseEntity<List<PrizesResponseDto>> getByActorId(@RequestBody PrizesIdsRequestDto idsDto) {
+        return new ResponseEntity<>(prizesService.getAllByIds(idsDto.getPrizesIds())
                 .stream()
                 .map(prizesMapper::toDto)
                 .collect(Collectors.toList()), HttpStatus.OK);
@@ -57,13 +65,5 @@ public class PrizesController {
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         prizesService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @PostMapping("/by-actor")
-    public ResponseEntity<List<PrizesResponseDto>> getByActorId(@RequestBody PrizesIdsRequestDto idsDto) {
-        return new ResponseEntity<>(prizesService.getAllByIds(idsDto.getPrizesIds())
-                .stream()
-                .map(prizesMapper::toDto)
-                .collect(Collectors.toList()), HttpStatus.OK);
     }
 }

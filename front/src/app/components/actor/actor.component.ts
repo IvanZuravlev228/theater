@@ -6,6 +6,7 @@ import {PrizeService} from "../../services/prize.service";
 import {PrizesIdsRequestDto} from "../../models/prize/PrizesIdsRequestDto";
 import {ActorRegister} from "../../models/actor/ActorRegister";
 import {MessageService} from "../../services/message.service";
+import {environment} from "../../../environment/environment";
 
 @Component({
   selector: 'app-actor',
@@ -41,6 +42,7 @@ export class ActorComponent implements OnInit{
       },
       error: (error) => {
         console.log(error);
+        this.messageService.showMessage(error.error.message);
       }
     })
   }
@@ -55,7 +57,7 @@ export class ActorComponent implements OnInit{
         // console.log(prizes);
       },
       error: (error) => {
-        console.log(error);
+        this.errorHandle(error.status);
       }
     })
   }
@@ -84,7 +86,7 @@ export class ActorComponent implements OnInit{
         this.resetCheckboxSelection();
       },
       error: (error) => {
-        console.log(error);
+        this.errorHandle(error.status);
       }
     })
   }
@@ -96,7 +98,7 @@ export class ActorComponent implements OnInit{
         // console.log(prizes);
       },
       error: (error) => {
-        console.log(error);
+        this.errorHandle(error.status);
       }
     })
   }
@@ -137,7 +139,23 @@ export class ActorComponent implements OnInit{
   }
 
   nextPage() {
+    if (this.actors.length < environment.paginationSizeForActor) {
+      return;
+    }
     this.indexPage++;
     this.getAllActors();
+  }
+
+  private errorHandle(status: number) {
+    console.log(status);
+    if (status === 500) {
+      this.messageService.showMessage("You may have to re-authenticate");
+    }
+    if (status === 429) {
+      this.messageService.showMessage("You have reached your request limit (10 req/min)");
+    }
+    if (status === 400) {
+      this.messageService.showMessage("Something went wrong");
+    }
   }
 }

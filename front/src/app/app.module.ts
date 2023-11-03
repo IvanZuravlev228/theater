@@ -13,6 +13,8 @@ import { TheaterComponent } from './components/theater/theater.component';
 import { MessageComponent } from './components/message/message.component';
 import { PerformanceDetailsComponent } from './components/performance-details/performance-details.component';
 import { ContractDetailsComponent } from './components/contract-details/contract-details.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { ContractDetailsComponent } from './components/contract-details/contract
     MessageComponent,
     PerformanceDetailsComponent,
     ContractDetailsComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

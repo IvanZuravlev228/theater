@@ -50,6 +50,9 @@ export class PerformanceComponent implements OnInit{
   }
 
   nextPage() {
+    if (this.performances.length < environment.paginationSizeForPerformance) {
+      return;
+    }
     this.indexPage++;
     this.getAllPerformance();
     this.showAddFormBoolean = false;
@@ -152,4 +155,6 @@ export class PerformanceComponent implements OnInit{
     }
     this.showCreateNewPerforBoolen = !this.showCreateNewPerforBoolen;
   }
+
+
 }

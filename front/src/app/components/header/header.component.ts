@@ -13,14 +13,22 @@ export class HeaderComponent {
   }
 
   goToActorPage() {
-    this.router.navigate([environment.rootURL + "/actors"])
+    this.router.navigate([environment.rootURL + "/actors"]);
   }
 
   goToPerformancePage() {
-    this.router.navigate([environment.rootURL + "/performances"])
+    this.router.navigate([environment.rootURL + "/performances"]);
   }
 
   goToContracPage() {
-    this.router.navigate([environment.rootURL + "/contracts"])
+    this.router.navigate([environment.rootURL + "/contracts"]);
+  }
+
+  goToRegisterPage() {
+    this.router.navigate([environment.rootURL + "/sign-up"]);
+  }
+
+  goToLoginPage() {
+    this.router.navigate([environment.rootURL + "/sign-in"]);
   }
 }

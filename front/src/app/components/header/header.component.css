@@ -24,11 +24,11 @@
 }
 
 /* Стили для кнопок навигации */
-.actor-container, .perfor-container, .contract-container {
+.item {
   margin-left: 20px;
 }
 
-.actor-container button, .perfor-container button, .contract-container button {
+.item button {
   background-color: #b36cb9;
   color: #fff;
   border: none;
@@ -39,7 +39,7 @@
 }
 
 /* Стили для кнопок при наведении */
-.actor-container button:hover, .perfor-container button:hover, .contract-container button:hover {
+.item button:hover {
   background-color: #000; /* Черный цвет */
   transition: background-color 0.5s ease;
 }

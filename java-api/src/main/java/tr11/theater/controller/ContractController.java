@@ -28,12 +28,6 @@ public class ContractController {
     private final ContractService contractService;
     private final RequestResponseMapper<Contract, ContractRequestDto, ContractResponseDto> contractMapper;
 
-    @PostMapping
-    public ResponseEntity<ContractResponseDto> save(@RequestBody @Valid ContractRequestDto requestEntity) {
-        return new ResponseEntity<>(contractMapper.toDto(
-                contractService.save(contractMapper.toModel(requestEntity))), HttpStatus.CREATED);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<ContractResponseDto> getById(@PathVariable Long id) {
         return new ResponseEntity<>(contractMapper.toDto(contractService.getById(id)), HttpStatus.OK);
@@ -47,6 +41,18 @@ public class ContractController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
+    @GetMapping("/actor/{actorId}/performance/{perId}")
+    public ResponseEntity<ContractResponseDto> getByActorAndPerformanceId(@PathVariable Long actorId,
+                                                                          @PathVariable Long perId) {
+        return new ResponseEntity<>(contractMapper.toDto(contractService.getByActorAndPerformanceId(actorId, perId)), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<ContractResponseDto> save(@RequestBody @Valid ContractRequestDto requestEntity) {
+        return new ResponseEntity<>(contractMapper.toDto(
+                contractService.save(contractMapper.toModel(requestEntity))), HttpStatus.CREATED);
+    }
+
     @PutMapping("/{prevId}")
     public ResponseEntity<ContractResponseDto> update(@PathVariable Long prevId,
                                                       @RequestBody @Valid ContractRequestDto newEntity) {
@@ -58,11 +64,5 @@ public class ContractController {
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         contractService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @GetMapping("/actor/{actorId}/performance/{perId}")
-    public ResponseEntity<ContractResponseDto> getByActorAndPerformanceId(@PathVariable Long actorId,
-                                                                          @PathVariable Long perId) {
-        return new ResponseEntity<>(contractMapper.toDto(contractService.getByActorAndPerformanceId(actorId, perId)), HttpStatus.OK);
     }
 }

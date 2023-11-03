@@ -50,12 +50,16 @@ export class ContractComponent implements OnInit{
         })
       },
       error: (error) => {
+        this.errorHandle(error.status);
         console.log(error);
       }
     })
   }
 
   nextPage() {
+    if (this.performanceActorContract.length < environment.paginationSizeForContract) {
+      return;
+    }
     this.indexPage++;
     this.getAllPerformance();
   }
@@ -73,6 +77,7 @@ export class ContractComponent implements OnInit{
         pac.actorsWithoutContract = actors;
       },
       error: (error) => {
+        this.errorHandle(error.status);
         console.log(error);
       }
     });
@@ -91,6 +96,7 @@ export class ContractComponent implements OnInit{
         })
       },
       error: (error) => {
+        this.errorHandle(error.status);
         console.log(error);
       }
     });
@@ -110,6 +116,7 @@ export class ContractComponent implements OnInit{
         ac.contract = contract;
       },
       error: (error) => {
+        this.errorHandle(error.status);
         this.messageService.showMessage("May be this actor doesn't have a contract");
       }
     });
@@ -136,7 +143,7 @@ export class ContractComponent implements OnInit{
         }
       },
       error: (error) => {
-        this.messageService.showMessage("May be this actor doesn't have a contract");
+        this.errorHandle(error.status);
       }
     })
   }
@@ -150,7 +157,7 @@ export class ContractComponent implements OnInit{
         }
       },
       error: (error) => {
-        this.messageService.showMessage("May be this actor doesn't have a contract");
+        this.errorHandle(error.status);
       }
     })
   }
@@ -161,8 +168,21 @@ export class ContractComponent implements OnInit{
         this.router.navigate([environment.rootURL + "/performances"]);
       },
       error: (error) => {
-        // this.messageService.showMessage("May be this actor doesn't have a contract");
+        console.log(error);
+        this.errorHandle(error.status);
       }
     })
+  }
+
+  private errorHandle(status: number) {
+    if (status === 0) {
+      this.messageService.showMessage("You don't have access or you have to re authenticated");
+    }
+    if (status === 429) {
+      this.messageService.showMessage("You have reached your request limit (10 req/min)");
+    }
+    if (status === 400) {
+      this.messageService.showMessage("Something went wrong");
+    }
   }
 }
