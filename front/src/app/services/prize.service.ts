@@ -17,7 +17,10 @@ export class PrizeService {
     return this.http.post<Prize[]>(environment.backendURL + "/prizes/by-actor", body, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer " + this.cookie.get("jwt-token")
+        "Authorization": "Bearer " + this.cookie.get("jwt-token"),
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization, X-Requested-With"
       }})
   }
 

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -27,15 +26,9 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(InvalidCredentialException.class)
-    public ResponseEntity<ExceptionResponse> invalidCredentialHandler() {
-        ExceptionResponse response = new ExceptionResponse("Incorrect username or password");
+    public ResponseEntity<ExceptionResponse> invalidCredentialHandler(InvalidCredentialException ex) {
+        ExceptionResponse response = new ExceptionResponse(ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(InvalidJwtException.class)
-    public ResponseEntity<ExceptionResponse> invalidJwtHandler() {
-        ExceptionResponse response = new ExceptionResponse("You should re authenticate");
-        return new ResponseEntity<>(response, HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
     }
 
     @Override
@@ -60,5 +53,18 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
             return field + " " + message;
         }
         return e.getDefaultMessage();
+    }
+
+    @ExceptionHandler(InvalidJwtException.class)
+    public ResponseEntity<ExceptionResponse> invalidJwtHandler(InvalidJwtException ex) {
+        ExceptionResponse response = new ExceptionResponse(ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
+    }
+
+     // Fallback handles any unhandled exceptions.
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ExceptionResponse> handleOtherException(Exception ex) {
+        ExceptionResponse response = new ExceptionResponse(ex.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
