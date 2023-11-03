@@ -42,14 +42,6 @@ export class PerformanceService {
       }});
   }
 
-  // updatePerformance(performance: Performance) {
-  //   const body = JSON.stringify(performance);
-  //   return this.http.put<Performance>(environment.backendURL + "/performances/" + performance.id, body, {
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     }});
-  // }
-
   addActorsToPerformance(performance: Performance) {
     const body = JSON.stringify(performance.actorIds);
     return this.http.put<Performance>(environment.backendURL + "/performances/actors/" + performance.id, body, {

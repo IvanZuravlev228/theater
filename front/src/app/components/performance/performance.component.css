@@ -47,17 +47,16 @@ table {
 }
 
 thead th {
-  background-color: #b36cb9; /* Красный цвет */
+  background-color: #b36cb9;
   color: #fff;
   font-weight: bold;
   text-align: center;
   padding: 10px;
 }
 
-/* Стили для ячеек таблицы */
 td {
   padding: 10px;
-  border-bottom: 1px solid #ddd; /* Линии-разделители между строками */
+  border-bottom: 1px solid #ddd;
   text-align: center;
 }
 
@@ -106,12 +105,3 @@ td {
 .create-new-perfor {
   padding: 7px 15px;
 }
-
-
-
-
-
-
-
-
-

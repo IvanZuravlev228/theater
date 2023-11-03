@@ -18,8 +18,7 @@ export class LoginComponent {
   constructor(private loginService: LoginService,
               private messageService: MessageService,
               private cookie: CookieService,
-              private router: Router) {
-  }
+              private router: Router) {}
 
   login() {
     if (!this.checkCorrectLoginUser(this.loginUser)) {
@@ -33,27 +32,26 @@ export class LoginComponent {
         this.router.navigate([environment.rootURL + "/performances"])
       },
       error: (error) => {
-        console.log(error.error.message);
-        this.errorHandle(error.status);
+        this.errorHandle(error);
       }
     })
   }
 
   private checkCorrectLoginUser(user: LoginUser) {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    console.log(emailPattern.test(user.email) && user.password.length > 5);
     return (emailPattern.test(user.email) && user.password.length > 5);
   }
 
-  private errorHandle(status: number) {
-    if (status === 511) {
+  private errorHandle(error: any) {
+    if (error.status === 511) {
       this.messageService.showMessage("You should re authenticate");
     }
-    if (status === 403) {
+    else if (error.status === 403) {
       this.messageService.showMessage("Something went wrong. Try again please")
     }
-    if (status === 400) {
-      this.messageService.showMessage("You may have entered an incorrect password or email address")
+    else {
+      this.messageService.showMessage(error.error.message);
     }
+
   }
 }

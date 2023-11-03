@@ -23,7 +23,6 @@
   display: flex;
 }
 
-/* Стили для кнопок навигации */
 .item {
   margin-left: 20px;
 }
@@ -38,7 +37,6 @@
   transition: background-color 0.5s ease;
 }
 
-/* Стили для кнопок при наведении */
 .item button:hover {
   background-color: #000; /* Черный цвет */
   transition: background-color 0.5s ease;

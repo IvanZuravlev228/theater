@@ -19,12 +19,12 @@ export class ActorComponent implements OnInit{
   actorRegister: ActorRegister = new ActorRegister();
   prizesForRegisterActor: Prize[] = [];
   prizes: Prize[] = [];
+  stopInputPrizesForRegister: boolean = false;
   indexPage: number = 0;
 
   constructor(private actorService: ActorService,
               private prizesService: PrizeService,
-              private messageService: MessageService) {
-  }
+              private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.getAllActors();
@@ -47,29 +47,17 @@ export class ActorComponent implements OnInit{
     })
   }
 
-
   showPrizesByIds(ids: number[]) {
     let dto = new PrizesIdsRequestDto();
     dto.prizesIds = ids;
     this.prizesService.getAllPrizesByIds(dto).subscribe({
       next: (prizes) => {
         this.prizesByActor = prizes;
-        // console.log(prizes);
       },
       error: (error) => {
-        this.errorHandle(error.status);
+        this.errorHandle(error);
       }
     })
-  }
-
-  private checkCorrectDataForRegisterActor(actor: ActorRegister): boolean {
-    return (actor.name.length < 4 || actor.lastname.length < 4 || actor.experience < 0);
-  }
-
-  private resetCheckboxSelection() {
-    this.prizes.forEach(prize => {
-      prize.selected = false;
-    });
   }
 
 
@@ -86,7 +74,7 @@ export class ActorComponent implements OnInit{
         this.resetCheckboxSelection();
       },
       error: (error) => {
-        this.errorHandle(error.status);
+        this.errorHandle(error);
       }
     })
   }
@@ -95,15 +83,13 @@ export class ActorComponent implements OnInit{
     this.prizesService.getAllPrizes().subscribe({
       next: (prizes) => {
         this.prizes = prizes;
-        // console.log(prizes);
       },
       error: (error) => {
-        this.errorHandle(error.status);
+        this.errorHandle(error);
       }
     })
   }
 
-  stopInputPrizesForRegister: boolean = false;
   updateSelectedPrizes(selectedPrize: Prize) {
     const selectedPrizes = this.prizes.filter(prize => prize.selected);
     console.log("selectedPrizes.length = " + selectedPrizes.length);
@@ -115,22 +101,6 @@ export class ActorComponent implements OnInit{
       this.stopInputPrizesForRegister = true;
     }
   }
-
-  // deleteActor(actorId: number) {
-  //   this.actorService.deleteActorById(actorId).subscribe({
-  //     next: () => {
-  //       const index = this.actors.findIndex(actor => actor.id === actorId);
-  //       if (index !== -1) {
-  //         this.actors.splice(index, 1);
-  //       }
-  //     },
-  //     error: (error) => {
-  //       console.log(error);
-  //       this.messageService.showMessage("Something went wrong. May be this actor is playing in some performance?")
-  //     }
-  //   })
-  // }
-
   previousPage() {
     if (this.indexPage !== 0) {
       this.indexPage--;
@@ -146,16 +116,27 @@ export class ActorComponent implements OnInit{
     this.getAllActors();
   }
 
-  private errorHandle(status: number) {
-    console.log(status);
-    if (status === 500) {
+  private errorHandle(error: any) {
+    if (error.status === 500) {
       this.messageService.showMessage("You may have to re-authenticate");
     }
-    if (status === 429) {
-      this.messageService.showMessage("You have reached your request limit (10 req/min)");
+    if (error.status === 0) {
+      this.messageService.showMessage("Mey be you don't gave a access to this end point");
     }
-    if (status === 400) {
+    if (error.status === 400) {
       this.messageService.showMessage("Something went wrong");
     }
+  }
+
+  private checkCorrectDataForRegisterActor(actor: ActorRegister): boolean {
+    return (actor.name.length < environment.minimalLengthForActorNameAndLastname ||
+      actor.lastname.length < environment.minimalLengthForActorNameAndLastname ||
+      actor.experience < environment.minimalActorsExperience);
+  }
+
+  private resetCheckboxSelection() {
+    this.prizes.forEach(prize => {
+      prize.selected = false;
+    });
   }
 }

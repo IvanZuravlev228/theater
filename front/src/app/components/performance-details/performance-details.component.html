@@ -1,7 +1,6 @@
 <app-header></app-header>
 <app-message></app-message>
 <main class="performance-container">
-<!--  <p>ID: {{mainPerformance.id}}</p>-->
   <section class="performance">
 
     <h2>{{mainPerformance.name}}</h2>
@@ -18,15 +17,11 @@
     <h2>Actors</h2>
     <div class="actors-container">
       <article class="actor-item" *ngFor="let ac of actorWithContracts">
-        <!--      <p>ID: {{ ac.actor.id }}</p>-->
         <p id="actor-title">{{ ac.actor.name }} {{ ac.actor.lastname }}</p>
         <p>Experience: {{ ac.actor.experience }}</p>
-        <!--      <button (click)="getContractByActorId(ac)">contract</button>-->
         <p>Role: {{ac.contract.role }}</p>
         <p>Salary: {{ac.contract.salary }}$</p>
       </article>
     </div>
   </section>
 </main>
-
-

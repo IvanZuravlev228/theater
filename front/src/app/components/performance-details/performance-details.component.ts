@@ -24,8 +24,7 @@ export class PerformanceDetailsComponent implements OnInit {
               private performanceService: PerformanceService,
               private actorService: ActorService,
               private messageService: MessageService,
-              private contractService: ContractService) {
-  }
+              private contractService: ContractService) {}
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -40,7 +39,8 @@ export class PerformanceDetailsComponent implements OnInit {
         next: (per) => {
           this.mainPerformance = per;
         },
-        error: () => {
+        error: (error) => {
+          this.errorHandle(error);
         }
       });
   }
@@ -58,7 +58,7 @@ export class PerformanceDetailsComponent implements OnInit {
         });
       },
       error: (error) => {
-        this.messageService.showMessage(error);
+        this.errorHandle(error);
       }
     });
   }
@@ -70,8 +70,17 @@ export class PerformanceDetailsComponent implements OnInit {
         this.mainPerformance.budget = this.mainPerformance.budget - contract.salary;
       },
       error: (error) => {
-        this.messageService.showMessage("May be this actor doesn't have a contract");
+        this.errorHandle(error);
       }
     });
+  }
+
+  private errorHandle(error: any) {
+    if (error.status === 0) {
+      this.messageService.showMessage("You don't have access or you have to re authenticated");
+    }
+    if (error.status === 400) {
+      this.messageService.showMessage("Something went wrong");
+    }
   }
 }

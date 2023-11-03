@@ -10,16 +10,6 @@
   padding: 10px;
 }
 
-.actor {
-
-}
-
-.prizes {
-}
-
-.prizes-container {
-}
-
 .prize-item {
   background-color: #cccccc;
   border: 1px solid black;
@@ -28,15 +18,11 @@
   margin-bottom: 15px;
 }
 
-/* Основной контейнер формы */
 .sign-actor-form {
-  /*background-color: #000; !* Черный цвет фона *!*/
-  /*color: #fff; !* Белый цвет текста *!*/
   padding: 20px;
   border-radius: 10px;
 }
 
-/* Стили для полей ввода и меток */
 .role-input, .salary-input {
   margin-bottom: 10px;
 }
@@ -49,7 +35,7 @@ label {
 input[type="text"] {
   width: 80%;
   padding: 10px;
-  border: 1px solid #b36cb9; /* Фиолетовая граница */
+  border: 1px solid #b36cb9;
   border-radius: 5px;
 }
 

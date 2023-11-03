@@ -7,9 +7,6 @@
 
 .all-header {
   padding: 25px 0px 30px 10px;
-
-  /*font-size: 30px;*/
-  /*font-weight: bold;*/
 }
 
 .perfor-item {
@@ -22,7 +19,6 @@
   align-items: center;
   margin-bottom: 10px;
 }
-
 
 .name {
   font-size: 25px;
@@ -110,5 +106,3 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
-
-

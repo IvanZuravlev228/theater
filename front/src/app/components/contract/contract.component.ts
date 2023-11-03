@@ -23,15 +23,13 @@ export class ContractComponent implements OnInit{
               private contractService: ContractService,
               private actorService: ActorService,
               private messageService:MessageService,
-              private router: Router) {
-  }
+              private router: Router) {}
 
   ngOnInit(): void {
     this.getAllPerformance();
   }
 
   getAllPerformance() {
-
     this.performanceService.getAllPerformance(this.indexPage).subscribe({
       next: (performances ) => {
         if (performances.length === 0) {
@@ -50,8 +48,7 @@ export class ContractComponent implements OnInit{
         })
       },
       error: (error) => {
-        this.errorHandle(error.status);
-        console.log(error);
+        this.errorHandle(error);
       }
     })
   }
@@ -77,8 +74,7 @@ export class ContractComponent implements OnInit{
         pac.actorsWithoutContract = actors;
       },
       error: (error) => {
-        this.errorHandle(error.status);
-        console.log(error);
+        this.errorHandle(error);
       }
     });
 
@@ -96,8 +92,7 @@ export class ContractComponent implements OnInit{
         })
       },
       error: (error) => {
-        this.errorHandle(error.status);
-        console.log(error);
+        this.errorHandle(error);
       }
     });
     this.setShowDeleteButton(pac);
@@ -116,8 +111,7 @@ export class ContractComponent implements OnInit{
         ac.contract = contract;
       },
       error: (error) => {
-        this.errorHandle(error.status);
-        this.messageService.showMessage("May be this actor doesn't have a contract");
+        this.errorHandle(error);
       }
     });
   }
@@ -136,14 +130,13 @@ export class ContractComponent implements OnInit{
       next: () => {
         const index = actorWithContract.findIndex(ac => ac.contract.id === contractId);
 
-        // Если актер найден (index не равен -1), удаляем его из массива
         if (index !== -1) {
           actorsWithoutContract.push(actorWithContract[index].actor);
           actorWithContract.splice(index, 1);
         }
       },
       error: (error) => {
-        this.errorHandle(error.status);
+        this.errorHandle(error);
       }
     })
   }
@@ -157,7 +150,7 @@ export class ContractComponent implements OnInit{
         }
       },
       error: (error) => {
-        this.errorHandle(error.status);
+        this.errorHandle(error);
       }
     })
   }
@@ -168,20 +161,16 @@ export class ContractComponent implements OnInit{
         this.router.navigate([environment.rootURL + "/performances"]);
       },
       error: (error) => {
-        console.log(error);
-        this.errorHandle(error.status);
+        this.errorHandle(error);
       }
     })
   }
 
-  private errorHandle(status: number) {
-    if (status === 0) {
+  private errorHandle(error: any) {
+    if (error.status === 0) {
       this.messageService.showMessage("You don't have access or you have to re authenticated");
     }
-    if (status === 429) {
-      this.messageService.showMessage("You have reached your request limit (10 req/min)");
-    }
-    if (status === 400) {
+    if (error.status === 400) {
       this.messageService.showMessage("Something went wrong");
     }
   }

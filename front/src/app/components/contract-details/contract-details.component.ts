@@ -29,8 +29,7 @@ export class ContractDetailsComponent implements OnInit {
               private actorService: ActorService,
               private prizeService: PrizeService,
               private contractService: ContractService,
-              private messageService: MessageService) {
-  }
+              private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
@@ -46,7 +45,7 @@ export class ContractDetailsComponent implements OnInit {
         this.performance = performance;
       },
       error: (error) => {
-        console.log(error);
+        this.errorHandle(error);
       }
     });
   }
@@ -57,7 +56,7 @@ export class ContractDetailsComponent implements OnInit {
         this.actor = actor;
       },
       error: (error) => {
-        console.log(error);
+        this.errorHandle(error);
       }
     });
   }
@@ -70,7 +69,7 @@ export class ContractDetailsComponent implements OnInit {
         this.prizes = prizes;
       },
       error: (error) => {
-        console.log(error);
+        this.errorHandle(error);
       }
     })
   }
@@ -78,7 +77,8 @@ export class ContractDetailsComponent implements OnInit {
   signActor() {
     this.contractForAdd.actorId = this.actor.id;
     this.contractForAdd.performanceId = this.performance.id;
-    if (this.contractForAdd.role.length < 5 || this.contractForAdd.salary < 0) {
+    if (this.contractForAdd.role.length < environment.minimalLengthForActorRole
+      || this.contractForAdd.salary < environment.minimalActorsSalary) {
       this.messageService.showMessage("Role length should be greater than 5 and salary greater then 0");
       return;
     }
@@ -90,8 +90,17 @@ export class ContractDetailsComponent implements OnInit {
         this.contractForAdd.salary = 0;
       },
       error: (error) => {
-        console.log(error);
+        this.errorHandle(error);
       }
     })
+  }
+
+  private errorHandle(error: any) {
+    if (error.status === 0) {
+      this.messageService.showMessage("You don't have access or you have to re authenticated");
+    }
+    if (error.status === 400) {
+      this.messageService.showMessage("Something went wrong");
+    }
   }
 }

@@ -5,7 +5,6 @@
     <h1>Performances and their actors</h1>
   </div>
   <section class="perfor-item" *ngFor="let pac of performanceActorContract">
-<!--    <p>ID: {{pac.performance.id}}</p>-->
     <div class="per-header">
       <div class="name">
         <p>{{pac.performance.name}}</p>
@@ -23,7 +22,6 @@
       <div class="actor-with-contract-container">
         <h4>Actor with a contract</h4>
         <article class="actor-with-contract-item" *ngFor="let ac of pac.actorWithContract">
-<!--          <p>ID: {{ ac.actor.id }}</p>-->
           <p>Full name: {{ ac.actor.name }} {{ ac.actor.lastname }}</p>
           <p>Experience: {{ ac.actor.experience }} years</p>
           <button class="get-contract-button" (click)="getContractByActorAndPerforId(ac, pac.performance.id)">contract</button>
@@ -43,7 +41,6 @@
       <div class="actor-without-contract-container">
         <h4>Actor without a contract</h4>
         <article class="actor-without-contract-item" *ngFor="let actor of pac.actorsWithoutContract">
-<!--          <p>ID: {{ actor.id }}</p>-->
           <p>Full name: {{ actor.name }} {{ actor.lastname }}</p>
           <p>Experience: {{ actor.experience }} years</p>
           <div class="buttons">
@@ -59,4 +56,6 @@
     <button class="previousPage" (click)="previousPage()"><</button>
     <button class="nextPage" (click)="nextPage()">></button>
   </div>
+
+  <app-message></app-message>
 </main>

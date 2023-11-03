@@ -2,7 +2,6 @@ package tr11.theater.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -28,9 +27,7 @@ public class ActorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ActorResponseDto>> getAll(Pageable pageable,
-                                                         @RequestParam(defaultValue = "false") Boolean withoutContact) {
-//        List<Actor> actors = withoutContact ? actorService.getAllWithoutContract(pageable) : actorService.getAll(pageable);
+    public ResponseEntity<List<ActorResponseDto>> getAll(Pageable pageable) {
         return new ResponseEntity<>(actorService.getAll(pageable)
                 .stream()
                 .map(actorMapper::toDto)
@@ -45,7 +42,6 @@ public class ActorController {
                 .stream()
                 .map(actorMapper::toDto)
                 .collect(Collectors.toList()), HttpStatus.OK);
-
     }
 
     @PostMapping

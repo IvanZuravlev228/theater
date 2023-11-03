@@ -10,7 +10,6 @@
           <th>lastname</th>
           <th>experience</th>
           <th>prizes</th>
-          <!--        <th>delete</th>-->
         </tr>
         </thead>
         <tbody>
@@ -20,7 +19,6 @@
           <td>{{ actor.lastname }}</td>
           <td>{{ actor.experience }}</td>
           <td><button (click)="showPrizesByIds(actor.prizesIds)">show prizes</button></td>
-          <!--        <td><button (click)="deleteActor(actor.id)">del</button></td>-->
         </tr>
         </tbody>
       </table>
@@ -37,8 +35,8 @@
     <button class="previousPage" (click)="previousPage()"><-</button>
     <button class="nextPage" (click)="nextPage()">-></button>
   </div>
-  <!-- ADD NEW ACTOR-->
 
+  <!-- ADD NEW ACTOR-->
   <app-message></app-message>
   <section class="new-actor">
     <form (ngSubmit)="addNewActor()" class="login-form">

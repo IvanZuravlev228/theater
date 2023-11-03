@@ -13,11 +13,12 @@ export class ContractService {
   constructor(private http: HttpClient,
               private cookie: CookieService) { }
 
-  // getContractById(id: number) {
-  //   return this.http.get<Contract>(environment.backendURL + "/contracts/" + id, {
-  //     headers: {
-  //     }});
-  // }
+  getContractById(id: number) {
+    return this.http.get<Contract>(environment.backendURL + "/contracts/" + id, {
+      headers: {
+        "Authorization": "Bearer " + this.cookie.get("jwt-token")
+      }});
+  }
 
   getContractByActorAndPerformanceId(actorId: number, perId: number) {
     return this.http.get<Contract>(environment.backendURL + "/contracts/actor/" + actorId + "/performance/" + perId, {

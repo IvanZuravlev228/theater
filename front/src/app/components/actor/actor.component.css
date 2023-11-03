@@ -1,38 +1,32 @@
-/* Стили для контейнера "actor-infor" */
 .actor-infor {
   display: flex;
 }
 
-/* Стили для блока "all-actors" */
 .all-actors {
-  flex: 75%; /* Занимает 75% ширины экрана */
+  flex: 75%;
   padding: 20px;
 }
 
-/* Стили для таблицы */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
 }
 
-/* Стили для заголовков таблицы */
 thead th {
-  background-color: #b36cb9; /* Красный цвет */
+  background-color: #b36cb9;
   color: #fff;
   font-weight: bold;
   text-align: center;
   padding: 10px;
 }
 
-/* Стили для ячеек таблицы */
 td {
   padding: 10px;
-  border-bottom: 1px solid #ddd; /* Линии-разделители между строками */
+  border-bottom: 1px solid #ddd;
   text-align: center;
 }
 
-/* Стили для кнопок "show prizes" */
 button {
   background-color: #b36cb9;
   color: #fff;
@@ -45,25 +39,22 @@ button {
 }
 
 button:hover {
-  background-color: #000; /* Черный цвет */
+  background-color: #000;
   transition: background-color 0.5s ease;
 }
 
-/* Стили для блока "prizes-actor" */
 .prizes-actor {
-  flex: 25%; /* Занимает 25% ширины экрана */
+  flex: 25%;
   padding: 20px;
 }
 
-/* Стили для параграфов в блоке "prizes-actor" */
 .prizes-actor p {
   margin: 0;
   font-weight: bold;
 }
 
-
-
 .new-actor {
+  margin-top: 15px;
   width: 100%;
   height: auto;
   display: flex;
@@ -107,9 +98,6 @@ button:hover {
   background-color: #fff;
 }
 
-.login-form .prize-checkbox {
-  /*margin-bottom: 5px;*/
-}
 .prize-checkbox-container {
   display: flex;
   margin-bottom: 15px;
@@ -119,10 +107,6 @@ button:hover {
 .prize-checkbox-text {
   font-size: 16px;
   flex: 75%;
-}
-
-.login-form .prize-checkbox input {
-  /*margin-left: 15px;*/
 }
 
 .login-form .prize-checkbox label {

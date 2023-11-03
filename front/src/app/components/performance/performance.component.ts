@@ -26,8 +26,7 @@ export class PerformanceComponent implements OnInit{
   constructor(private perforService: PerformanceService,
               private actorService: ActorService,
               private messageService: MessageService,
-              private router: Router) {
-  }
+              private router: Router) {}
 
   ngOnInit() {
     this.getAllPerformance();
@@ -68,17 +67,6 @@ export class PerformanceComponent implements OnInit{
     }
   }
 
-  // showActors(perId: number) {
-  //   this.actorService.getAllActorsByPerformanceId(perId).subscribe({
-  //     next: (actors) => {
-  //       this.actorsByPerformance = actors;
-  //     },
-  //     error: (error) => {
-  //       this.messageService.showMessage(error);
-  //     }
-  //   })
-  // }
-
   addNewPerformance() {
     if (this.checkCorrectDataForPerformanceAdd(this.performanceForAdd)) {
       this.messageService.showMessage("Incorrect data fro new performance. Name length should be greater then 3, description then 3, budget then 0");
@@ -92,7 +80,7 @@ export class PerformanceComponent implements OnInit{
         this.actorsForNewPer = this.actorsForNewPer.filter(actor => !actor.selected);
       },
       error: (error) => {
-        this.messageService.showMessage(error);
+        this.errorHandle(error);
       }
     })
   }
@@ -107,7 +95,7 @@ export class PerformanceComponent implements OnInit{
         this.actorsForNewPer = actors;
       },
       error: (error) => {
-        this.messageService.showMessage(error);
+        this.errorHandle(error);
       }
     });
   }
@@ -124,7 +112,7 @@ export class PerformanceComponent implements OnInit{
         }
       },
       error: (error) => {
-        this.messageService.showMessage(error);
+        this.errorHandle(error);
       }
     })
   }
@@ -146,7 +134,9 @@ export class PerformanceComponent implements OnInit{
   }
 
   private checkCorrectDataForPerformanceAdd(performance: Performance) : boolean {
-    return performance.name.length < 3 || performance.description.length < 3 || performance.budget < 0;
+    return performance.name.length < environment.minimalLengthForPerforNameAndDesc ||
+      performance.description.length < environment.minimalLengthForPerforNameAndDesc ||
+      performance.budget < environment.minimalPerforBudget;
   }
 
   showCreatenewPerfor() {
@@ -156,5 +146,12 @@ export class PerformanceComponent implements OnInit{
     this.showCreateNewPerforBoolen = !this.showCreateNewPerforBoolen;
   }
 
-
+  private errorHandle(error: any) {
+    if (error.status === 0) {
+      this.messageService.showMessage("You don't have access or you have to re authenticated");
+    }
+    if (error.status === 400) {
+      this.messageService.showMessage("Something went wrong");
+    }
+  }
 }

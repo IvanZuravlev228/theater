@@ -5,7 +5,6 @@
       <table>
         <thead>
         <tr>
-<!--          <th>ID</th>-->
           <th>name</th>
           <th>description</th>
           <th>budget</th>
@@ -15,13 +14,10 @@
         </thead>
         <tbody>
         <tr *ngFor="let per of performances">
-<!--          <td>{{ per.id }}</td>-->
           <td>{{ per.name }}</td>
           <td>{{ per.description }}</td>
           <td>{{ per.budget }}</td>
-          <!--        <td><button (click)="showActors(per.id)">show actors</button></td>-->
           <td><button (click)="showMore(per.id)">show more</button></td>
-          <!--        <td><button (click)="deleteActor(actor.id)">del</button></td>-->
           <td><button (click)="showAddForm(per)">add actors</button></td>
         </tr>
         </tbody>

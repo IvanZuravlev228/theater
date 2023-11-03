@@ -15,8 +15,7 @@ export class RegisterComponent {
 
   constructor(private registerService: RegisterService,
               private messageService: MessageService,
-              private router: Router) {
-  }
+              private router: Router) {}
 
   register() {
     this.registerService.registerUser(this.registerUser).subscribe({
@@ -25,8 +24,17 @@ export class RegisterComponent {
         this.router.navigate([environment.rootURL + "/sign-in"]);
       },
       error: (error) => {
-
+        this.errorHandle(error);
       }
     })
+  }
+
+  private errorHandle(error: any) {
+    if (error.status === 0) {
+      this.messageService.showMessage("You don't have access or you have to re authenticated");
+    }
+    if (error.status === 400) {
+      this.messageService.showMessage("Something went wrong");
+    }
   }
 }

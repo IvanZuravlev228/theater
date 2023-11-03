@@ -9,8 +9,7 @@ import {environment} from "../../../environment/environment";
 })
 export class HeaderComponent {
 
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router) {}
 
   goToActorPage() {
     this.router.navigate([environment.rootURL + "/actors"]);

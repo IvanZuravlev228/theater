@@ -19,7 +19,6 @@ import tr11.theater.service.mapper.RequestResponseMapper;
 public class ActorServiceImpl implements ActorService {
     private final ActorRepository actorRepository;
 
-
     @Override
     public Actor save(Actor actor) {
         return actorRepository.save(actor);
@@ -37,11 +36,6 @@ public class ActorServiceImpl implements ActorService {
                 .stream()
                 .collect(Collectors.toList());
     }
-
-//    @Override
-//    public List<Actor> getAllWithoutContract(Pageable pageable) {
-//        return actorRepository.findAllWithoutContract(pageable.getPageSize(), pageable.getPageNumber());
-//    }
 
     @Override
     public Actor update(Long prevActorId, Actor actorForUpdate) {

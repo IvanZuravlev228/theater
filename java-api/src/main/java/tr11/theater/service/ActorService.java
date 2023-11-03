@@ -12,8 +12,6 @@ public interface ActorService {
 
     List<Actor> getAll(Pageable pageable);
 
-//    List<Actor> getAllWithoutContract(Pageable pageable);
-
     Actor update(Long prevActorId, Actor actorForUpdate);
 
     void delete(Long id);
