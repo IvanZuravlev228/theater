@@ -1,0 +1,51 @@
+/* Основной контейнер формы */
+.user {
+  background-color: #fff; /* Фон формы */
+  color: #333; /* Цвет текста */
+  padding: 20px;
+  border: 1px solid #ddd; /* Границы формы */
+  border-radius: 5px;
+  width: 500px; /* Ширина формы, если необходимо ограничить */
+  margin: 50px auto; /* Выравнивание по центру страницы */
+}
+
+/* Заголовок формы */
+.user h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Стили для полей формы */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 90%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Стили для кнопки */
+.submit-button {
+  background-color: #b36cb9; /* Цвет фона кнопки */
+  color: #fff; /* Цвет текста на кнопке */
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Стили для кнопки при наведении */
+.submit-button:hover {
+  background-color: #000; /* Измененный цвет фона при наведении */
+  transition: background-color 0.3s ease;
+}

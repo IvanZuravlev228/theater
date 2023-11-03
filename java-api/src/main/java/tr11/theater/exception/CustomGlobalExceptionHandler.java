@@ -23,7 +23,19 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ExceptionResponse> notFoundHandler() {
         ExceptionResponse response = new ExceptionResponse("Can't find entity");
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InvalidCredentialException.class)
+    public ResponseEntity<ExceptionResponse> invalidCredentialHandler() {
+        ExceptionResponse response = new ExceptionResponse("Incorrect username or password");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(InvalidJwtException.class)
+    public ResponseEntity<ExceptionResponse> invalidJwtHandler() {
+        ExceptionResponse response = new ExceptionResponse("You should re authenticate");
+        return new ResponseEntity<>(response, HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
     }
 
     @Override

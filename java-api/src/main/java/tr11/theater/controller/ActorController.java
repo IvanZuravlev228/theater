@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import tr11.theater.dto.actor.ActorRequestDto;
 import tr11.theater.dto.actor.ActorResponseDto;
 import tr11.theater.model.Actor;
-import tr11.theater.repository.ActorRepository;
 import tr11.theater.service.ActorService;
 import tr11.theater.service.mapper.RequestResponseMapper;
 
