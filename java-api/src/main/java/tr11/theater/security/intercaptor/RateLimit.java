@@ -1,4 +1,4 @@
-package tr11.theater.security.key;
+package tr11.theater.security.intercaptor;
 
 import java.time.Duration;
 import java.util.Map;

@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import tr11.theater.security.jwt.JwtTokenProvider;
-import tr11.theater.security.key.RateLimit;
 
 @RequiredArgsConstructor
 @Component
