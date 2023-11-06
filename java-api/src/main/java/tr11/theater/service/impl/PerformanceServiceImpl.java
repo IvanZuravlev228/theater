@@ -44,16 +44,8 @@ public class PerformanceServiceImpl implements PerformanceService {
     }
 
     @Override
-    public Performance deleteActorFromPerformance(Long actorId, Long performanceId) {
-        Actor actor = actorService.getById(actorId);
-        Performance performance = getById(performanceId);
-        performance.getActors().remove(actor);
-        return performanceRepository.save(performance);
-    }
-
-    @Override
-    public Performance update(Long prevId, Performance newPerformance) {
-        Performance prevPerformance = getById(prevId);
+    public Performance update(Long id, Performance newPerformance) {
+        Performance prevPerformance = getById(id);
         newPerformance.setId(prevPerformance.getId());
         return performanceRepository.save(newPerformance);
     }

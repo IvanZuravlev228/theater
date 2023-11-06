@@ -54,11 +54,11 @@ public class PrizesController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    @PutMapping("/{prevId}")
-    public ResponseEntity<PrizesResponseDto> update(@PathVariable Long prevId,
+    @PutMapping("/{id}")
+    public ResponseEntity<PrizesResponseDto> update(@PathVariable Long id,
                                                     @RequestBody PrizesRequestDto newEntity) {
         return new ResponseEntity<>(prizesMapper.toDto(
-                prizesService.update(prevId, prizesMapper.toModel(newEntity))), HttpStatus.OK);
+                prizesService.update(id, prizesMapper.toModel(newEntity))), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

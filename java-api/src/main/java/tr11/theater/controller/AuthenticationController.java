@@ -8,7 +8,6 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,7 @@ import tr11.theater.service.mapper.impl.UserMapper;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class AuthenticationController {
     private final UserMapper userMapper;
     private final AuthenticationService authenticationService;
     private final JwtTokenProvider jwtTokenProvider;

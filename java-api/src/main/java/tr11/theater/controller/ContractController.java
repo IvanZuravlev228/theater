@@ -40,10 +40,10 @@ public class ContractController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    @GetMapping("/actor/{actorId}/performance/{perId}")
+    @GetMapping("/actor/{actorId}/performance/{performanceId}")
     public ResponseEntity<ContractResponseDto> getByActorAndPerformanceId(@PathVariable Long actorId,
-                                                                          @PathVariable Long perId) {
-        return new ResponseEntity<>(contractMapper.toDto(contractService.getByActorAndPerformanceId(actorId, perId)), HttpStatus.OK);
+                                                                          @PathVariable Long performanceId) {
+        return new ResponseEntity<>(contractMapper.toDto(contractService.getByActorAndPerformanceId(actorId, performanceId)), HttpStatus.OK);
     }
 
     @PostMapping
@@ -52,11 +52,11 @@ public class ContractController {
                 contractService.save(contractMapper.toModel(requestEntity))), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{prevId}")
-    public ResponseEntity<ContractResponseDto> update(@PathVariable Long prevId,
+    @PutMapping("/{id}")
+    public ResponseEntity<ContractResponseDto> update(@PathVariable Long id,
                                                       @RequestBody @Valid ContractRequestDto newEntity) {
         return new ResponseEntity<>(contractMapper.toDto(
-                contractService.update(prevId, contractMapper.toModel(newEntity))), HttpStatus.OK);
+                contractService.update(id, contractMapper.toModel(newEntity))), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

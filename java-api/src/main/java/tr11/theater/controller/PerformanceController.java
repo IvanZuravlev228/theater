@@ -9,13 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tr11.theater.dto.actor.ActorRequestDto;
-import tr11.theater.dto.actor.ActorResponseDto;
 import tr11.theater.dto.performance.PerformanceRequestDto;
 import tr11.theater.dto.performance.PerformancesResponseDto;
 import tr11.theater.model.Actor;
 import tr11.theater.model.Performance;
-import tr11.theater.repository.PerformanceRepository;
 import tr11.theater.service.ActorService;
 import tr11.theater.service.PerformanceService;
 import tr11.theater.service.mapper.RequestResponseMapper;
@@ -26,7 +23,6 @@ import tr11.theater.service.mapper.RequestResponseMapper;
 public class PerformanceController {
     private final PerformanceService performanceService;
     private final RequestResponseMapper<Performance, PerformanceRequestDto, PerformancesResponseDto> performanceMapper;
-    private final PerformanceRepository performanceRepository;
     private final ActorService actorService;
 
     @GetMapping("/{id}")
@@ -42,32 +38,24 @@ public class PerformanceController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    @GetMapping("/contract/loading")
-    public ResponseEntity<List<PerformancesResponseDto>> getLoading() {
-        return new ResponseEntity<>(performanceRepository.findAllLoading()
-                .stream()
-                .map(performanceMapper::toDto)
-                .collect(Collectors.toList()), HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<PerformancesResponseDto> save(@RequestBody @Valid PerformanceRequestDto requestEntity) {
         return new ResponseEntity<>(performanceMapper.toDto(
                 performanceService.save(performanceMapper.toModel(requestEntity))), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{prevId}")
-    public ResponseEntity<PerformancesResponseDto> update(@PathVariable Long prevId,
+    @PutMapping("/{id}")
+    public ResponseEntity<PerformancesResponseDto> update(@PathVariable Long id,
                                                           @RequestBody @Valid PerformanceRequestDto newEntity) {
         return new ResponseEntity<>(performanceMapper.toDto(
-                performanceService.update(prevId, performanceMapper.toModel(newEntity))), HttpStatus.OK);
+                performanceService.update(id, performanceMapper.toModel(newEntity))), HttpStatus.OK);
     }
 
-    @PutMapping("/actors/{prevId}")
-    public ResponseEntity<PerformancesResponseDto> addActors(@PathVariable Long prevId,
+    @PutMapping("/actors/{id}")
+    public ResponseEntity<PerformancesResponseDto> addActors(@PathVariable Long id,
                                                              @RequestBody List<Long> actorIds) {
-        actorIds.stream().map(acId -> performanceService.addActorToPerformance(acId, prevId)).collect(Collectors.toList());
-        return new ResponseEntity<>(performanceMapper.toDto(performanceService.getById(prevId)), HttpStatus.CREATED);
+        actorIds.forEach(actorId -> performanceService.addActorToPerformance(actorId, id));
+        return new ResponseEntity<>(performanceMapper.toDto(performanceService.getById(id)), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
@@ -76,10 +64,10 @@ public class PerformanceController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/{perId}/actor/{actorId}")
-    public ResponseEntity<Void> deleteActorFromPerformance(@PathVariable Long perId,
+    @DeleteMapping("/{performanceId}/actor/{actorId}")
+    public ResponseEntity<Void> deleteActorFromPerformance(@PathVariable Long performanceId,
                                                            @PathVariable Long actorId) {
-        Performance performance = performanceService.getById(perId);
+        Performance performance = performanceService.getById(performanceId);
         Actor actor = actorService.getById(actorId);
         performance.setActors(performance.getActors()
                 .stream()

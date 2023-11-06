@@ -34,7 +34,7 @@ public class ActorController {
                 .collect(Collectors.toList()), HttpStatus.OK);
     }
 
-    @GetMapping("/by-performance/{id}")
+    @GetMapping("/performance/{id}")
     public ResponseEntity<List<ActorResponseDto>> getAllByPerformanceId(@PathVariable Long id,
                                                                         @RequestParam(defaultValue = "true") Boolean hasContracts) {
         List<Actor> actors = hasContracts ? actorService.findAllWithContractWithPerformance(id) : actorService.findAllWithoutContractWithPerformance(id);
@@ -49,10 +49,10 @@ public class ActorController {
         return new ResponseEntity<>(actorMapper.toDto(actorService.save(actorMapper.toModel(requestEntity))), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{prevId}")
-    public ResponseEntity<ActorResponseDto> update(@PathVariable Long prevId,
+    @PutMapping("/{id}")
+    public ResponseEntity<ActorResponseDto> update(@PathVariable Long id,
                                                    @RequestBody @Valid ActorRequestDto newEntity) {
-        return new ResponseEntity<>(actorMapper.toDto(actorService.update(prevId, actorMapper.toModel(newEntity))), HttpStatus.OK);
+        return new ResponseEntity<>(actorMapper.toDto(actorService.update(id, actorMapper.toModel(newEntity))), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

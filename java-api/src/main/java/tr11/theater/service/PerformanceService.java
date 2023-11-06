@@ -3,6 +3,7 @@ package tr11.theater.service;
 import org.springframework.data.domain.Pageable;
 import tr11.theater.model.Performance;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface PerformanceService {
@@ -14,9 +15,7 @@ public interface PerformanceService {
 
     Performance addActorToPerformance(Long actorId, Long performanceId);
 
-    Performance deleteActorFromPerformance(Long actorId, Long performanceId);
-
-    Performance update(Long prevId, Performance newPerformance);
+    Performance update(Long id, Performance newPerformance);
 
     void delete(Long id);
 }

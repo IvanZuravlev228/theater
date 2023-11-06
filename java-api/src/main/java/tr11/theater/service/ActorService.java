@@ -12,11 +12,9 @@ public interface ActorService {
 
     List<Actor> getAll(Pageable pageable);
 
-    Actor update(Long prevActorId, Actor actorForUpdate);
+    Actor update(Long previousActorId, Actor actorForUpdate);
 
     void delete(Long id);
-
-    List<Actor> getAllByPerformanceId(Long perId);
 
     List<Actor> findAllWithContractWithPerformance(Long id);
 

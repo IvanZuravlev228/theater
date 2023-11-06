@@ -38,8 +38,8 @@ public class ActorServiceImpl implements ActorService {
     }
 
     @Override
-    public Actor update(Long prevActorId, Actor actorForUpdate) {
-        Actor prevActor = getById(prevActorId);
+    public Actor update(Long previousActorId, Actor actorForUpdate) {
+        Actor prevActor = getById(previousActorId);
         actorForUpdate.setId(prevActor.getId());
         return actorRepository.save(actorForUpdate);
     }
@@ -47,11 +47,6 @@ public class ActorServiceImpl implements ActorService {
     @Override
     public void delete(Long id) {
         actorRepository.deleteById(id);
-    }
-
-    @Override
-    public List<Actor> getAllByPerformanceId(Long perId) {
-        return actorRepository.findActorsByPerformanceId(perId);
     }
 
     @Override

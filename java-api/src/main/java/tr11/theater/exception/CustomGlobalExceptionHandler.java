@@ -20,21 +20,20 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ExceptionResponse> notFoundHandler() {
-        ExceptionResponse response = new ExceptionResponse("Can't find entity");
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    public ResponseEntity<Object> notFoundHandler() {
+        return new ResponseEntity<>(createResponseObject("Can't find entity"), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(InvalidCredentialException.class)
-    public ResponseEntity<ExceptionResponse> invalidCredentialHandler() {
-        ExceptionResponse response = new ExceptionResponse("Incorrect username or password");
-        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<Object> invalidCredentialHandler() {
+        return new ResponseEntity<>(createResponseObject("Incorrect username or password"),
+                HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InvalidJwtException.class)
-    public ResponseEntity<ExceptionResponse> invalidJwtHandler() {
-        ExceptionResponse response = new ExceptionResponse("You should re authenticate");
-        return new ResponseEntity<>(response, HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
+    public ResponseEntity<Object> invalidJwtHandler() {
+        return new ResponseEntity<>(createResponseObject("You should re authenticate"),
+                HttpStatus.NETWORK_AUTHENTICATION_REQUIRED);
     }
 
     @Override
@@ -42,14 +41,29 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
                                                                   HttpHeaders headers,
                                                                   HttpStatusCode status,
                                                                   WebRequest request) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.BAD_REQUEST);
         List<String> errors = ex.getBindingResult().getAllErrors().stream()
                 .map(this::getErrorMessage)
                 .collect(Collectors.toList());
-        body.put("errors", errors);
-        return new ResponseEntity<>(body, headers, status);
+        return new ResponseEntity<>(createResponseObject(errors), headers, status);
+    }
+
+    private Map<String, Object> createResponseObject(String message) {
+        Map<String, Object> body = createMainBody();
+        body.put("errors", message);
+        return body;
+    }
+
+    private Map<String, Object> createResponseObject(List<String> message) {
+        Map<String, Object> body = createMainBody();
+        body.put("errors", message);
+        return body;
+    }
+
+    private Map<String, Object> createMainBody() {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.BAD_REQUEST);
+        return body;
     }
 
     private String getErrorMessage(ObjectError e) {

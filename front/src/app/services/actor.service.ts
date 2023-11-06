@@ -42,14 +42,14 @@ export class ActorService {
   }
 
   getAllActorsByPerformanceId(perId: number) {
-    return this.http.get<Actor[]>(environment.backendURL + "/actors/by-performance/" + perId, {
+    return this.http.get<Actor[]>(environment.backendURL + "/actors/performance/" + perId, {
       headers: {
         "Authorization": "Bearer " + this.cookie.get("jwt-token")
       }});
   }
 
   getAllActorsWithoutContractByPerformanceId(perId: number) {
-    return this.http.get<Actor[]>(environment.backendURL + "/actors/by-performance/" + perId + "?hasContracts=false", {
+    return this.http.get<Actor[]>(environment.backendURL + "/actors/performance/" + perId + "?hasContracts=false", {
       headers: {
         "Authorization": "Bearer " + this.cookie.get("jwt-token")
       }});
